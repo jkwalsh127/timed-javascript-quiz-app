@@ -28,3 +28,14 @@ article {
     border: 2px solid black;
     max-width: 900px;
 }
+
+button {
+    background-color: purple;
+    border-radius: 30px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 auto;
+    padding: 10px 50px;
+    font-size: 50px;
+}
