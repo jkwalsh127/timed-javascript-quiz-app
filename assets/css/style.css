@@ -1,0 +1,30 @@
+header {
+    width: 100%;
+    height: 70px;;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+}
+
+h3 {
+    color: white;
+    font-size: 30px;
+    display: flex;
+    align-self: center;
+    margin: 0 40px;
+}
+
+main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+article {
+    width: 90%;
+    height: fit-content;
+    border: 2px solid black;
+    max-width: 900px;
+}
