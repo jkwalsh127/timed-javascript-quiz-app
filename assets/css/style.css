@@ -42,3 +42,11 @@ button {
     padding: 10px 50px;
     font-size: 50px;
 }
+
+.correct {
+    background-color: darkgreen;
+}
+
+.incorrect {
+    background-color: red;
+}
