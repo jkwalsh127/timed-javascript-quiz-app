@@ -27,6 +27,9 @@ article {
     height: fit-content;
     border: 2px solid black;
     max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 button {
