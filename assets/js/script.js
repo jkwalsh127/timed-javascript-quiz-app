@@ -9,19 +9,38 @@ var answerbtn4 = document.querySelector("#btn4");
 var questionPrompt = document.querySelector("#question-prompt")
 
 answerbtn1.addEventListener("click", function(event) {
-
-    // var element = event.target;
-    // if (element.matches("button")) {
-        var state = event.target.getAttribute("data-state");
-        if (state === "correct") {
-            // element.setAttribute("class", "correct");
-            console.log("correct answer")
-        } else {
-            // element.setAttribute("class", "incorrect")
-            console.log("incorrect answer")
-        }
+    var state = event.target.getAttribute("class");
+    if (state === "correct") {
+        console.log("correct answer")
+    } else if (state === "incorrect") {
+        console.log("incorrect answer")
     }
-);
+});
+answerbtn2.addEventListener("click", function(event) {
+    var state = event.target.getAttribute("class");
+    if (state === "correct") {
+        console.log("correct answer")
+    } else if (state === "incorrect") {
+        console.log("incorrect answer")
+    }
+});
+answerbtn3.addEventListener("click", function(event) {
+    var state = event.target.getAttribute("class");
+    if (state === "correct") {
+        console.log("correct answer")
+    } else if (state === "incorrect") {
+        console.log("incorrect answer")
+    }
+});
+answerbtn4.addEventListener("click", function(event) {
+    var state = event.target.getAttribute("class");
+    if (state === "correct") {
+        console.log("correct answer")
+    } else if (state === "incorrect") {
+        console.log("incorrect answer")
+    }
+});
+
 
 var timeEl = document.getElementById("time");
 
