@@ -44,7 +44,7 @@ answerbtn4.addEventListener("click", function(event) {
 
 var timeEl = document.getElementById("time");
 
-var timeRemaining = 5;
+var timeRemaining = 60;
 
 function keepTime() {
     var timeTracker = setInterval(function() {
@@ -65,6 +65,37 @@ function keepTime() {
 
 var answerList = document.querySelector("#answer-list");
 
+var correctScore = document.querySelector("#correct-score")
+var incorrectScore = document.querySelector("#incorrect-score")
+
+var correctCount = localStorage.getItem("correctCount");
+
+console.log("correct counter initiated", typeof correctCount)
+
+if(correctCount !== null){
+  console.log(correctCount, typeof correctCount)
+  correctScore.textContent = correctCount;
+}else {
+  console.log(correctCount)
+  correctCount = 0;
+  localStorage.setItem("correctCount", correctCount);
+  correctScore.textContent = count;
+}
+
+var incorrectCount = localStorage.getItem("incorrectCount");
+
+console.log("correct counter initiated", typeof incorrectCount)
+
+if(incorrectCount !== null){
+  console.log(incorrectCount, typeof incorrectCount)
+  incorrectScore.textContent = incorrectCount;
+}else {
+  console.log(incorrectCount)
+  incorrectCount = 0;
+  localStorage.setItem("incorrectCount", incorrectCount);
+  incorrectScore.textContent = count;
+}
+
 function beginQuiz() {
 
     keepTime();
@@ -78,9 +109,13 @@ function beginQuiz() {
         if (element.matches("button")) {
             var state = element.getAttribute("data-state");
             if (state === "correct") {
-                alert("that's correct!");
+                correctCount++;
+                correctScore.textContent = correctCount;
+                console.log(correctCount, typeof correctCount);
             } else {
-                alert("that's incorrect...");
+                incorrectCount++;
+                incorrectScore.textContent = incorrectCount;
+                console.log(incorrectCount, typeof incorrectCount);
             }
         }
     });
@@ -117,22 +152,18 @@ function firstQuestion() {
     answerbtn1.addEventListener("click", function(event) {
         var element = event.target;
         element.setAttribute("data-state", "correct")
-        alert("you selected correct")
     });
     answerbtn2.addEventListener("click", function(event) {
         var element = event.target;
         element.setAttribute("data-state", "incorrect")
-        alert("you selected incorrect")
     });
     answerbtn3.addEventListener("click", function(event) {
         var element = event.target;
         element.setAttribute("data-state", "incorrect")
-        alert("you selected incorrect")
     });
     answerbtn4.addEventListener("click", function(event) {
         var element = event.target;
         element.setAttribute("data-state", "incorrect")
-        alert("you selected incorrect")
     });
 
 };
@@ -144,6 +175,3 @@ function firstQuestion() {
     //     element.setAttribute("data-name", "data-neutral");
     //     console.log("neutral")
     // }
-
-    
-
