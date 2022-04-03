@@ -58,11 +58,32 @@ function keepTime() {
     }, 1000);
 };
 
+// function userAnswer() {
+//     if ()
+// }
+
+
+var answerList = document.querySelector("#answer-list");
+
 function beginQuiz() {
 
     keepTime();
 
     firstQuestion();
+
+    // userAnswer();
+
+    answerList.addEventListener("click", function(event) {
+        var element = event.target;
+        if (element.matches("button")) {
+            var state = element.getAttribute("data-state");
+            if (state === "correct") {
+                alert("that's correct!");
+            } else {
+                alert("that's incorrect...");
+            }
+        }
+    });
 
     beginButton.setAttribute("style", "display: none")
     var questionCard = document.createElement("article");
@@ -84,9 +105,36 @@ function beginQuiz() {
 
 function firstQuestion() {
     answerbtn1.setAttribute("class", "correct");
+    answerbtn1.setAttribute("data-class", "correct");
     answerbtn2.setAttribute("class", "incorrect");
+    answerbtn2.setAttribute("data-class", "incorrect");
     answerbtn3.setAttribute("class", "incorrect");
+    answerbtn3.setAttribute("data-class", "incorrect");
     answerbtn4.setAttribute("class", "incorrect");
+    answerbtn4.setAttribute("data-class", "incorrect");
+
+
+    answerbtn1.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "correct")
+        alert("you selected correct")
+    });
+    answerbtn2.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect")
+        alert("you selected incorrect")
+    });
+    answerbtn3.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect")
+        alert("you selected incorrect")
+    });
+    answerbtn4.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect")
+        alert("you selected incorrect")
+    });
+
 };
 
     // var state = element.getAttribute("data-state");
@@ -96,4 +144,6 @@ function firstQuestion() {
     //     element.setAttribute("data-name", "data-neutral");
     //     console.log("neutral")
     // }
+
+    
 
