@@ -70,3 +70,8 @@ button {
 .incorrect {
     background-color: red;
 }
+
+/* hide answer buttons before quiz begins */
+#answer-list {
+    display: none;
+}

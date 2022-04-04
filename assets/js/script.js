@@ -1,7 +1,15 @@
 var beginButton = document.querySelector("#btn-begin");
 beginButton.addEventListener("click", beginQuiz);
 var playAgainButton = document.querySelector("#btn-play-again");
-playAgainButton.addEventListener("click", beginQuiz);
+playAgainButton.addEventListener("click", reloadPage);
+
+
+// Call answer-list to display answer ul upon starting each question
+var answerList = document.querySelector("#answer-list");
+
+function reloadPage() {
+    location.reload();
+}
 
 var answerbtn1 = document.querySelector("#btn1");
 var answerbtn2 = document.querySelector("#btn2");
@@ -57,7 +65,6 @@ function keepTime() {
         if (timeRemaining === 0) {
             clearInterval(timeTracker); 
             timeEl.textContent = "time's up";
-            alert("Good Job");
             correctScore.textContent = "0";
             incorrectScore.textContent = "0";
             // welcomeHeader.setAttribute("style", "display: none")
@@ -66,8 +73,11 @@ function keepTime() {
             answerList.setAttribute("style", "display: none");
             afterAction.setAttribute("style", "display: block");
             playAgainButton.setAttribute("style", "display: block");
-
-        }
+            // correctScore = 0;
+            // correctCount = 0;
+            // incorrectScore = 0;
+            // incorrectCount = 0;
+        } 
     }, 1000);
 };
 
@@ -89,37 +99,42 @@ var correctCount = localStorage.getItem("correctCount");
 
 console.log("correct counter initiated", typeof correctCount)
 
-if(correctCount !== null){
-  console.log(correctCount, typeof correctCount)
-  correctScore.textContent = correctCount;
-}else {
-  console.log(correctCount)
-  correctCount = 0;
-  localStorage.setItem("correctCount", correctCount);
-  correctScore.textContent = count;
-}
+    if(correctCount !== null){
+    console.log(correctCount, typeof correctCount)
+    correctScore.textContent = correctCount;
+    }else {
+    console.log(correctCount)
+    correctCount = 0;
+    localStorage.setItem("correctCount", correctCount);
+    correctScore.textContent = count;
+    }
 
-var incorrectCount = localStorage.getItem("incorrectCount");
+    var incorrectCount = localStorage.getItem("incorrectCount");
 
-console.log("correct counter initiated", typeof incorrectCount)
+    console.log("incorrect counter initiated", typeof incorrectCount)
 
-if(incorrectCount !== null){
-  console.log(incorrectCount, typeof incorrectCount)
-  incorrectScore.textContent = incorrectCount;
-}else {
-  console.log(incorrectCount)
-  incorrectCount = 0;
-  localStorage.setItem("incorrectCount", incorrectCount);
-  incorrectScore.textContent = count;
-}
+    if(incorrectCount !== null){
+    console.log(incorrectCount, typeof incorrectCount)
+    incorrectScore.textContent = incorrectCount;
+    }else {
+    console.log(incorrectCount)
+    incorrectCount = 0;
+    localStorage.setItem("incorrectCount", incorrectCount);
+    incorrectScore.textContent = count;
+    }
 
 function beginQuiz() {
+    
+    beginButton.setAttribute("style", "display: none;");
+    welcomeHeader.setAttribute("style", "display: none;");
+    welcomeParagraph.setAttribute("style", "display: none;");
+    questionPrompt.setAttribute("style", "display: block");
+    answerList.setAttribute("style", "display: block");
+    playAgainButton.setAttribute("style", "display: none");
+    answerList.setAttribute("style", "display: block");
 
-    welcomeHeader.setAttribute("style", "display: none;")
-    welcomeParagraph.setAttribute("style", "display: none;")
-    questionPrompt.setAttribute("style", "display: block")
-    answerList.setAttribute("style", "display: block")
-
+    // Set timer to begin game
+    timeRemaining = 6;
     
     keepTime();
 
@@ -143,7 +158,8 @@ function beginQuiz() {
         }
     });
 
-    beginButton.setAttribute("style", "display: none")
+
+
 };
 
 // function setCorrect(event) {
