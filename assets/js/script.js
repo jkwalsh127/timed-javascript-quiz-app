@@ -7,7 +7,6 @@ var answerbtn4 = document.querySelector("#btn4");
 
 var questionPrompt = document.querySelector("#question-prompt");
 
-var answerList = document.querySelector("#answer-list");
 var afterAction = document.querySelector("#after-action")
 
 var correctScore = document.querySelector("#correct-score")
@@ -29,7 +28,7 @@ var timeRemaining = 6;
 
 
 // Call answer-list to display answer ul upon starting each question
-var answerList = document.querySelector("#answer-list");
+var answerButtonList = document.querySelector("#answer-button-list");
 // 
 
 // reload page upon clicking the play again button
@@ -39,39 +38,6 @@ function reloadPage() {
     location.reload();
 }
 // 
-
-// answerbtn1.addEventListener("click", function(event) {
-//     var state = event.target.getAttribute("class");
-//     if (state === "correct") {
-//         console.log("correct answer")
-//     } else {
-//         console.log("incorrect answer")
-//     }
-// });
-// answerbtn2.addEventListener("click", function(event) {
-//     var state = event.target.getAttribute("class");
-//     if (state === "correct") {
-//         console.log("correct answer")
-//     } else {
-//         console.log("incorrect answer")
-//     }
-// });
-// answerbtn3.addEventListener("click", function(event) {
-//     var state = event.target.getAttribute("class");
-//     if (state === "correct") {
-//         console.log("correct answer")
-//     } else {
-//         console.log("incorrect answer")
-//     }
-// });
-// answerbtn4.addEventListener("click", function(event) {
-//     var state = event.target.getAttribute("class");
-//     if (state === "correct") {
-//         console.log("correct answer")
-//     } else {
-//         console.log("incorrect answer")
-//     }
-// });
 
 function keepTime() {
     var timeTracker = setInterval(function() {
@@ -85,17 +51,16 @@ function keepTime() {
             // welcomeHeader.setAttribute("style", "display: none")
             // welcomeParagraph.setAttribute("style", "display: none")
             questionPrompt.setAttribute("style", "display: none");
-            answerList.setAttribute("style", "display: none");
+            answerButtonList.setAttribute("style", "display: none");
             afterAction.setAttribute("style", "display: block");
             playAgainButton.setAttribute("style", "display: block");
         } 
     }, 1000);
 };
 
-console.log("correct counter initiated", typeof correctCount)
-
+// console.log("correct counter initiated", typeof correctCount)
 if(correctCount !== null){
-console.log(correctCount, typeof correctCount)
+// console.log(correctCount, typeof correctCount)
 correctScore.textContent = correctCount;
 }else {
 console.log(correctCount)
@@ -104,9 +69,9 @@ localStorage.setItem("correctCount", correctCount);
 correctScore.textContent = count;
 }
 
-console.log("incorrect counter initiated", typeof incorrectCount)
+// console.log("incorrect counter initiated", typeof incorrectCount)
 if(incorrectCount !== null){
-console.log(incorrectCount, typeof incorrectCount)
+// console.log(incorrectCount, typeof incorrectCount)
 incorrectScore.textContent = incorrectCount;
 }else {
 console.log(incorrectCount)
@@ -124,9 +89,9 @@ function beginQuiz() {
     welcomeHeader.setAttribute("style", "display: none;");
     welcomeParagraph.setAttribute("style", "display: none;");
     questionPrompt.setAttribute("style", "display: block");
-    answerList.setAttribute("style", "display: block");
+    answerButtonList.setAttribute("style", "display: block");
     playAgainButton.setAttribute("style", "display: none");
-    answerList.setAttribute("style", "display: block");
+    answerButtonList.setAttribute("style", "display: block");
 
     // Set timer to begin game
     timeRemaining = 6;
@@ -135,25 +100,24 @@ function beginQuiz() {
 
     firstQuestion();
 
-    // userAnswer();
-
-    answerList.addEventListener("click", function(event) {
+    answerButtonList.addEventListener("click", function(event) {
         var element = event.target;
         if (element.matches("button")) {
             var state = element.getAttribute("data-state");
             if (state === "correct") {
                 correctCount++;
                 correctScore.textContent = correctCount;
-                console.log(correctCount, typeof correctCount);
+                // console.log(correctCount, typeof correctCount);
             } else {
                 incorrectCount++;
                 incorrectScore.textContent = incorrectCount;
-                console.log(incorrectCount, typeof incorrectCount);
+                // console.log(incorrectCount, typeof incorrectCount);
             }
         }
     });
 };
 // 
+
 
 // Set the functions to call in questions
 function firstQuestion() {
@@ -167,18 +131,22 @@ function firstQuestion() {
     answerbtn1.addEventListener("click", function(event) {
         var element = event.target;
         element.setAttribute("data-state", "correct");
+        secondQuestion();
     });
     answerbtn2.addEventListener("click", function(event) {
         var element = event.target;
         element.setAttribute("data-state", "incorrect");
+        secondQuestion();
     });
     answerbtn3.addEventListener("click", function(event) {
         var element = event.target;
         element.setAttribute("data-state", "incorrect");
+        secondQuestion();
     });
     answerbtn4.addEventListener("click", function(event) {
         var element = event.target;
         element.setAttribute("data-state", "incorrect")
+        secondQuestion();
     });
 
 
@@ -195,18 +163,146 @@ function secondQuestion() {
     answerbtn1.addEventListener("click", function(event) {
         var element = event.target;
         element.setAttribute("data-state", "incorrect");
+        thirdQuestion();
     });
     answerbtn2.addEventListener("click", function(event) {
         var element = event.target;
-        element.setAttribute("data-state", "incorrect");
+        element.setAttribute("data-state", "correct");
+        thirdQuestion();
     });
     answerbtn3.addEventListener("click", function(event) {
         var element = event.target;
         element.setAttribute("data-state", "incorrect");
+        thirdQuestion();
     });
     answerbtn4.addEventListener("click", function(event) {
         var element = event.target;
-        element.setAttribute("data-state", "correct")
+        element.setAttribute("data-state", "incorrect");
+        thirdQuestion();
     });
+};
+
+function thirdQuestion() {
+
+    questionPrompt.textContent = "3?";
+    answerbtn1.textContent = "3";
+    answerbtn2.textContent = "3";
+    answerbtn3.textContent = "3";
+    answerbtn4.textContent = "3";
+
+    answerbtn1.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "correct");
+        fourthQuestion();
+    });
+    answerbtn2.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect");
+        fourthQuestion();
+    });
+    answerbtn3.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect");
+        fourthQuestion();
+    });
+    answerbtn4.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect");
+        fourthQuestion();
+    });
+};
+
+function fourthQuestion() {
+
+    questionPrompt.textContent = "4?";
+    answerbtn1.textContent = "4";
+    answerbtn2.textContent = "4";
+    answerbtn3.textContent = "4";
+    answerbtn4.textContent = "4";
+
+    answerbtn1.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect");
+        fifthQuestion();
+    });
+    answerbtn2.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "correct");
+        fifthQuestion();
+    });
+    answerbtn3.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect");
+        fifthQuestion();
+    });
+    answerbtn4.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect");
+        fifthQuestion();
+    });
+};
+
+function fifthQuestion() {
+
+    questionPrompt.textContent = "5?";
+    answerbtn1.textContent = "5";
+    answerbtn2.textContent = "5";
+    answerbtn3.textContent = "5";
+    answerbtn4.textContent = "5";
+
+    answerbtn1.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect");
+        sixthQuestion();
+    });
+    answerbtn2.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "correct");
+        sixthQuestion();
+    });
+    answerbtn3.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect");
+        sixthQuestion();
+    });
+    answerbtn4.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect");
+        sixthQuestion();
+    });
+};
+
+function sixthQuestion() {
+
+    questionPrompt.textContent = "6?";
+    answerbtn1.textContent = "6";
+    answerbtn2.textContent = "6";
+    answerbtn3.textContent = "6";
+    answerbtn4.textContent = "6";
+
+    answerbtn1.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect");
+        seventhQuestion();
+    });
+    answerbtn2.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "correct");
+        seventhQuestion();
+    });
+    answerbtn3.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect");
+        seventhQuestion();
+    });
+    answerbtn4.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect");
+        seventhQuestion();
+    });
+};
+
+function seventhQuestion() {
+
 };
 // 
