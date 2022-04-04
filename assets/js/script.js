@@ -1,62 +1,77 @@
 var beginButton = document.querySelector("#btn-begin");
-beginButton.addEventListener("click", beginQuiz);
 var playAgainButton = document.querySelector("#btn-play-again");
-playAgainButton.addEventListener("click", reloadPage);
-
-
-// Call answer-list to display answer ul upon starting each question
-var answerList = document.querySelector("#answer-list");
-
-function reloadPage() {
-    location.reload();
-}
-
 var answerbtn1 = document.querySelector("#btn1");
 var answerbtn2 = document.querySelector("#btn2");
 var answerbtn3 = document.querySelector("#btn3");
 var answerbtn4 = document.querySelector("#btn4");
 
+var questionPrompt = document.querySelector("#question-prompt");
+
+var answerList = document.querySelector("#answer-list");
+var afterAction = document.querySelector("#after-action")
+
+var correctScore = document.querySelector("#correct-score")
+var incorrectScore = document.querySelector("#incorrect-score")
+
+var welcomeHeader = document.querySelector("#welcome-header")
+var welcomeParagraph = document.querySelector("#welcome-paragraph")
+
+var correctCount = localStorage.getItem("correctCount");
+
+var incorrectCount = localStorage.getItem("incorrectCount");
+
 var questionPrompt = document.querySelector("#question-prompt")
-
-answerbtn1.addEventListener("click", function(event) {
-    var state = event.target.getAttribute("class");
-    if (state === "correct") {
-        console.log("correct answer")
-    } else if (state === "incorrect") {
-        console.log("incorrect answer")
-    }
-});
-answerbtn2.addEventListener("click", function(event) {
-    var state = event.target.getAttribute("class");
-    if (state === "correct") {
-        console.log("correct answer")
-    } else if (state === "incorrect") {
-        console.log("incorrect answer")
-    }
-});
-answerbtn3.addEventListener("click", function(event) {
-    var state = event.target.getAttribute("class");
-    if (state === "correct") {
-        console.log("correct answer")
-    } else if (state === "incorrect") {
-        console.log("incorrect answer")
-    }
-});
-answerbtn4.addEventListener("click", function(event) {
-    var state = event.target.getAttribute("class");
-    if (state === "correct") {
-        console.log("correct answer")
-    } else if (state === "incorrect") {
-        console.log("incorrect answer")
-    }
-});
-
 
 var timeEl = document.getElementById("time");
 
 var timeRemaining = 6;
 
 
+
+// Call answer-list to display answer ul upon starting each question
+var answerList = document.querySelector("#answer-list");
+// 
+
+// reload page upon clicking the play again button
+playAgainButton.addEventListener("click", reloadPage);
+
+function reloadPage() {
+    location.reload();
+}
+// 
+
+// answerbtn1.addEventListener("click", function(event) {
+//     var state = event.target.getAttribute("class");
+//     if (state === "correct") {
+//         console.log("correct answer")
+//     } else {
+//         console.log("incorrect answer")
+//     }
+// });
+// answerbtn2.addEventListener("click", function(event) {
+//     var state = event.target.getAttribute("class");
+//     if (state === "correct") {
+//         console.log("correct answer")
+//     } else {
+//         console.log("incorrect answer")
+//     }
+// });
+// answerbtn3.addEventListener("click", function(event) {
+//     var state = event.target.getAttribute("class");
+//     if (state === "correct") {
+//         console.log("correct answer")
+//     } else {
+//         console.log("incorrect answer")
+//     }
+// });
+// answerbtn4.addEventListener("click", function(event) {
+//     var state = event.target.getAttribute("class");
+//     if (state === "correct") {
+//         console.log("correct answer")
+//     } else {
+//         console.log("incorrect answer")
+//     }
+// });
 
 function keepTime() {
     var timeTracker = setInterval(function() {
@@ -73,55 +88,35 @@ function keepTime() {
             answerList.setAttribute("style", "display: none");
             afterAction.setAttribute("style", "display: block");
             playAgainButton.setAttribute("style", "display: block");
-            // correctScore = 0;
-            // correctCount = 0;
-            // incorrectScore = 0;
-            // incorrectCount = 0;
         } 
     }, 1000);
 };
 
-// function userAnswer() {
-//     if ()
-// }
-
-
-var answerList = document.querySelector("#answer-list");
-var afterAction = document.querySelector("#after-action")
-
-var correctScore = document.querySelector("#correct-score")
-var incorrectScore = document.querySelector("#incorrect-score")
-
-var welcomeHeader = document.querySelector("#welcome-header")
-var welcomeParagraph = document.querySelector("#welcome-paragraph")
-
-var correctCount = localStorage.getItem("correctCount");
-
 console.log("correct counter initiated", typeof correctCount)
 
-    if(correctCount !== null){
-    console.log(correctCount, typeof correctCount)
-    correctScore.textContent = correctCount;
-    }else {
-    console.log(correctCount)
-    correctCount = 0;
-    localStorage.setItem("correctCount", correctCount);
-    correctScore.textContent = count;
-    }
+if(correctCount !== null){
+console.log(correctCount, typeof correctCount)
+correctScore.textContent = correctCount;
+}else {
+console.log(correctCount)
+correctCount = 0;
+localStorage.setItem("correctCount", correctCount);
+correctScore.textContent = count;
+}
 
-    var incorrectCount = localStorage.getItem("incorrectCount");
+console.log("incorrect counter initiated", typeof incorrectCount)
+if(incorrectCount !== null){
+console.log(incorrectCount, typeof incorrectCount)
+incorrectScore.textContent = incorrectCount;
+}else {
+console.log(incorrectCount)
+incorrectCount = 0;
+localStorage.setItem("incorrectCount", incorrectCount);
+incorrectScore.textContent = count;
+}
 
-    console.log("incorrect counter initiated", typeof incorrectCount)
-
-    if(incorrectCount !== null){
-    console.log(incorrectCount, typeof incorrectCount)
-    incorrectScore.textContent = incorrectCount;
-    }else {
-    console.log(incorrectCount)
-    incorrectCount = 0;
-    localStorage.setItem("incorrectCount", incorrectCount);
-    incorrectScore.textContent = count;
-    }
+// The function that initates the quiz 
+beginButton.addEventListener("click", beginQuiz);
 
 function beginQuiz() {
     
@@ -157,56 +152,61 @@ function beginQuiz() {
             }
         }
     });
-
-
-
 };
+// 
 
-// function setCorrect(event) {
-//     var element = event.target;
-//     // event.stopPropagation();
-//     element.setAttribute("data-state", "correct");
-// };
-
-// function setIncorrect(event) {
-//     var element = event.target;
-//     element.setAttribute("data-state", "incorrect");
-// };
-
+// Set the functions to call in questions
 function firstQuestion() {
-    answerbtn1.setAttribute("class", "correct");
-    answerbtn1.setAttribute("data-class", "correct");
-    answerbtn2.setAttribute("class", "incorrect");
-    answerbtn2.setAttribute("data-class", "incorrect");
-    answerbtn3.setAttribute("class", "incorrect");
-    answerbtn3.setAttribute("data-class", "incorrect");
-    answerbtn4.setAttribute("class", "incorrect");
-    answerbtn4.setAttribute("data-class", "incorrect");
 
+    questionPrompt.textContent = "What is the correct syntax for using the addEventListener method?";
+    answerbtn1.textContent = "document.addEventListener(event, function, Capture)";
+    answerbtn2.textContent = "document.addEventListener(name, value)";
+    answerbtn3.textContent = "document.addEventListener(keyname, value)";
+    answerbtn4.textContent = "document.adddEventListener(name, condition)";
 
     answerbtn1.addEventListener("click", function(event) {
         var element = event.target;
-        element.setAttribute("data-state", "correct")
+        element.setAttribute("data-state", "correct");
     });
     answerbtn2.addEventListener("click", function(event) {
         var element = event.target;
-        element.setAttribute("data-state", "incorrect")
+        element.setAttribute("data-state", "incorrect");
     });
     answerbtn3.addEventListener("click", function(event) {
         var element = event.target;
-        element.setAttribute("data-state", "incorrect")
+        element.setAttribute("data-state", "incorrect");
     });
     answerbtn4.addEventListener("click", function(event) {
         var element = event.target;
         element.setAttribute("data-state", "incorrect")
     });
 
+
 };
 
-    // var state = element.getAttribute("data-state");
-    // if (state === "neutral") {
-    //     element.setAttribute("data-name", "data-correct");
-    // } else {
-    //     element.setAttribute("data-name", "data-neutral");
-    //     console.log("neutral")
-    // }
+function secondQuestion() {
+
+    questionPrompt.textContent = "Which of the following JavaScript types are not immutable?";
+    answerbtn1.textContent = "Null and Undefined types";
+    answerbtn2.textContent = "Symbol, BigInt, and Boolean types";
+    answerbtn3.textContent = "String and Number types";
+    answerbtn4.textContent = "Objects";
+
+    answerbtn1.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect");
+    });
+    answerbtn2.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect");
+    });
+    answerbtn3.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "incorrect");
+    });
+    answerbtn4.addEventListener("click", function(event) {
+        var element = event.target;
+        element.setAttribute("data-state", "correct")
+    });
+};
+// 
