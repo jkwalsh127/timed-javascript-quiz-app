@@ -22,9 +22,7 @@ h3 {
     display: none;
 }
 
-h3.score-count {
-    color: black;
-}
+
 
 main {
     width: 100%;
@@ -35,7 +33,7 @@ main {
 }
 
 article {
-    width: 90%;
+    width: 60%;
     height: fit-content;
     border: 2px solid black;
     max-width: 900px;
@@ -84,4 +82,61 @@ button {
 /* hide answer buttons before quiz begins */
 #answer-list {
     display: none;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30%;
+    border: 2px solid red;
+    border-radius: 20px;
+    padding: 2%;
+    margin: 2%;
+}
+
+section div {
+    display: flex;
+    flex-direction: row;
+}
+
+section h2 {
+    display: flex;
+    align-self: center;
+    font-size: 30px;
+    width: 100%;
+}
+
+section h3 {
+    color: rgb(0, 0, 0);
+    display: flex;
+    align-self: center;
+    padding: 10px 10px 3px 10px;
+    font-size: 20px;
+    width: 30%;
+}
+
+#correct {
+    border-bottom: 2px solid rgb(2, 110, 2);
+    justify-content: center;
+}
+
+#incorrect {
+    border-bottom: 2px solid rgb(137, 2, 2);
+    justify-content: center;
+}
+
+span.score-count {
+    padding: 0px 30px;
+    display: flex;
+    align-self: center;
+    font-size: 50px;
+    width: 50%;
+}
+
+hr {
+    width: 100%;
+    background-color: gray;
+    height: 1px;
+    border: none;
 }
