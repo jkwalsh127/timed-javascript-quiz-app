@@ -4,6 +4,15 @@
     --brown-background:  rgba(202, 133, 42, 0.507);
 }
 
+input {
+    height: 40px;
+    width: 90%;
+    padding: 0 0 0 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    border: 1px solid #001b44;
+    margin: 20px 5% 0 5%;
+}
 
 button {
     background-color: purple;
@@ -174,23 +183,33 @@ main {
     padding: 25px 40px;
     width: 80%;
 }
+/*  */
+/*  */
+
+/*  */
+/* Format the after-action content to display score and highscore submission form after quiz completion */
+#after-action {
+    display: none;
+    font-size: 30px;
+    margin: 50px 0 50px 100px;
+}
+
+#submit-score {
+    display: none;
+}
+
+#form-header {
+    font-size: 20px;
+    margin: 5%;
+}
 
 #btn-play-again {
     width: 60%;
     display: none;
-    margin: 250px 20% 0 20%;
+    margin: 100px 20% 0 20%;
 }
 /*  */
 /*  */
-
-#after-action {
-    display: none;
-    font-size: 30px;
-    margin: 50px 0 0 100px;
-}
-
-
-
 
 article p {
     margin: 20px 0;

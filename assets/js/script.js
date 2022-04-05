@@ -9,6 +9,7 @@ var welcomeArticle = document.querySelector("#welcome-article");
 var quizArticle = document.querySelector("#quiz-article");    
 var scoreBoard = document.querySelector("#scoreboard");   
 var afterAction = document.querySelector("#after-action");
+var submitScore = document.querySelector("#submit-score");
  
 
 var highscoreList = document.querySelector("#highscore-list");
@@ -131,8 +132,10 @@ function keepTime() {
 
             quizSection.setAttribute("style", "display: none");
 
-            questionNumber.textContent = "Time's up";
             afterAction.setAttribute("style", "display: block");
+            submitScore.setAttribute("style", "display: block");    
+            questionNumber.textContent = "Time's up";
+
             afterAction.textContent = "Nice job. You got " + correctCount + " answers correct.";
 
             playAgainButton.setAttribute("style", "display: block");
