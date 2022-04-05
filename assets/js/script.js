@@ -1,5 +1,7 @@
 var beginButton = document.querySelector("#btn-begin");
+var submitScoreButton = document.querySelector("#btn-submit-score");
 var playAgainButton = document.querySelector("#btn-play-again");
+
 var answerbtn1 = document.querySelector("#btn1");
 var answerbtn2 = document.querySelector("#btn2");
 var answerbtn3 = document.querySelector("#btn3");
@@ -30,7 +32,6 @@ var welcomeParagraph = document.querySelector("#welcome-paragraph")
 
 var timeEl = document.getElementById("time");
 
-var timeRemaining = 6;
 
 var answerButtonList = document.querySelector("#answer-button-list"); 
 
@@ -41,7 +42,20 @@ var incorrectCount = "";
 // 
 // 
 // reload page upon clicking the play again button
+function renderHighscores() {
+    var score = localStorage.getItem("score");
+    var initials = localStorage.getItem("initials");
+    if (!score || !initials) {
+        return;
+    }
+
+    highscoreOne.textContent = score
+    initialsOne.textContent = initials
+}
+
 playAgainButton.addEventListener("click", reloadPage);
+
+
 
 // reload page upon selecting to take the quiz again
 function reloadPage() {
@@ -52,16 +66,7 @@ function reloadPage() {
 // 
 
 
-function renderHighscores() {
-    var score = localStorage.getItem("correct-count");
-    var initials = localStorage.getItem("user-initials");
-    if (!score || !initials) {
-        return;
-    }
 
-    highscoreOne.textContent = score
-    initialsOne.textContent = initials
-}
 
 // var highscores = {
 //     player: initials.value;
@@ -87,8 +92,24 @@ function keepTime() {
 
             afterAction.textContent = "Nice job. You got " + correctCount + " answers correct.";
 
-            playAgainButton.setAttribute("style", "display: block");
-            renderHighscores();
+            submitScoreButton.setAttribute("style", "display: block");
+
+            // playAgainButton.setAttribute("style", "display: block");
+
+            submitScoreButton.addEventListener("click", function(event) {
+                event.preventDefault();
+            
+                var getInitials = document.querySelector("#submit-text").value;
+            
+                if (getInitials === "") {
+                    reloadPage;
+                } else {
+                    localStorage.setItem("score", correctCount);
+                    localStorage.setItem("initials", getInitials);
+                    renderHighscores();
+                };
+            });
+
         } 
     }, 1000);
 };
@@ -109,7 +130,7 @@ function beginQuiz() {
     scoreBoard.setAttribute("style", "display: block");
 
     // Set timer
-    timeRemaining = 6;
+    timeRemaining = 3;
     
     keepTime();
 
