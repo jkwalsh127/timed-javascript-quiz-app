@@ -6,6 +6,9 @@ var answerbtn2 = document.querySelector("#btn2");
 var answerbtn3 = document.querySelector("#btn3");
 var answerbtn4 = document.querySelector("#btn4");
 var card = document.querySelector("#card")
+var welcomeArticle = document.querySelector("#welcome-article");    
+var quizArticle = document.querySelector("#quiz-article");    
+var scoreBoard = document.querySelector("#scoreboard");    
 
 var highscoreList = document.querySelector("#highscore-list");
 
@@ -112,13 +115,6 @@ function storeHighScores() {
 }
 
 
-
-// function storeHighScores() {
-//     localStorage.setItem("highscores", JSON.stringify(todos));
-// }
-
-
-
 var highScores = [];
 var correctCounts = correctCount;
 console.log(correctCounts);
@@ -149,26 +145,11 @@ function keepTime() {
 
 
 function checkHighScore() {
-    // beginButton.setAttribute("style", "display: none;");
-    // welcomeParagraph.setAttribute("style", "display: none;");
-    // questionNumber.setAttribute("style", "display: none");
-    // questionPrompt.setAttribute("style", "display: none");
-    // answerButtonList.setAttribute("style", "display: none");
-
-
-    // var userScore = correctCount;
-    // if (userScore >= 2) {
-    //     var li = document.createElement("li");
-    //     li.textContent = userScore;
-    //     highscoreList.appendChild(li);
-    // }
-
     checkHighScoreButton.setAttribute("style", "display: none");
     questionNumber.textContent = "your final score is";
     playAgainButton.setAttribute("style", "display: block");
     storeHighScores();
     renderHighScores();
-    // card.setAttribute("style", "display: block");
 }
 
 
@@ -197,15 +178,19 @@ checkHighScoreButton.addEventListener("click", checkHighScore);
 
 function beginQuiz() {
     
+    welcomeArticle.setAttribute("style", "display: none")
+
     beginButton.setAttribute("style", "display: none;");
     welcomeHeader.setAttribute("style", "display: none;");
-    welcomeParagraph.setAttribute("style", "display: none;");
+    playAgainButton.setAttribute("style", "display: none");
+    card.setAttribute("style", "display: block");
+
+    quizArticle.setAttribute("style", "display: block");
+    scoreBoard.setAttribute("style", "display: block");
     questionNumber.setAttribute("style", "display: block");
     questionPrompt.setAttribute("style", "display: block");
     answerButtonList.setAttribute("style", "display: block");
-    playAgainButton.setAttribute("style", "display: none");
     answerButtonList.setAttribute("style", "display: block");
-    card.setAttribute("style", "display: block");
 
     // Set timer to begin game
     timeRemaining = 6;

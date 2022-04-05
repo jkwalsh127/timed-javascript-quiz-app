@@ -1,91 +1,4 @@
-header {
-    width: 100%;
-    height: 70px;;
-    background-color: black;
-    display: flex;
-    justify-content: space-between;
-}
-
-h3 {
-    color: white;
-    font-size: 30px;
-    display: flex;
-    align-self: center;
-    margin: 0 40px;
-}
-
-
-
-#after-action {
-    display: none;
-}
-
-
-
-main {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-article {
-    width: 60%;
-    height: fit-content;
-    border: 2px solid black;
-    border-radius: 20px;
-    max-width: 900px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-content: center;
-    align-items: center;
-}
-
-
-
-article p {
-    margin: 20px 0;
-}
-
-#btn-begin {
-    margin: 10px 0; 
-}
-
-#card {
-    display: none;
-    width: 95%;
-    padding: 2%;
-    margin: 2%;
-}
-
-#card-header {
-    border: 2px solid black;
-    border-radius: 20px 20px 0 0;
-    background-color: black;
-    color: white;
-    width: 100%;
-}
-
-h1 {
-    margin: 20px 20px;
-    font-size: 30px;
-    font-family: Noto-Sans;
-}
-
-/* #question-number {
-    display: none;
-} */
-
-#question-prompt {
-    display: none;
-}
-
-#after-action {
-    color: black;
-}
-
+/* global settings */
 button {
     background-color: purple;
     border-radius: 30px;
@@ -96,6 +9,151 @@ button {
     padding: 10px 50px;
     font-size: 50px;
 }
+/*  */
+/*  */
+
+/* header bar */
+header {
+    width: 100%;
+    height: 70px;;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+}
+
+#main-header {
+    color: white;
+    font-size: 40px;
+    display: flex;
+    align-self: center;
+    margin: 0 40px;
+}
+
+#main-span {
+    font-size: 20px;
+    padding: 15px 0 0 10px;
+}
+
+/*  */
+/*  */
+
+main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/*  */
+/* Format the article that displays upon page open */
+#welcome-article {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 450px;
+    border: 2px solid black;
+    border-radius: 15px;
+    align-items: center;
+    background-color: rgba(215, 206, 176, 0.526);
+}
+
+#welcome-header {
+    font-size: 80px;
+    color: black;
+    margin: 40px 55% 0 0;
+}
+
+#welcome-hr {
+    width: 80%;
+    background-color: rgb(142, 142, 142);
+    height: 1px;
+    border: none;
+    margin: 20px 5% 0 0;
+}
+
+#welcome-prompt {
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 140%;
+    margin: 20px 25px 0 25px;
+}
+
+#btn-begin {
+    margin: 60px 0 0 0; 
+    width: 400px;
+}
+/*  */
+/*  */
+
+/* Format the article that contains the questions */
+#quiz-article {
+    width: 60%;
+    height: fit-content;
+    border: 2px solid black;
+    border-radius: 20px;
+    max-width: 900px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+}
+
+#card-header {
+    border: 2px solid black;
+    border-radius: 20px 20px 0 0;
+    background-color: black;
+    color: white;
+    width: 100%;
+}
+
+#time {
+    font-size: 50px;
+}
+
+#question-number {
+    display: none;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#question-prompt {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    display: none;
+}
+/*  */
+
+
+
+article p {
+    margin: 20px 0;
+}
+
+
+
+#card {
+    display: none;
+    width: 95%;
+    padding: 2%;
+    margin: 2%;
+}
+
+
+
+h1 {
+    margin: 20px 20px;
+    font-size: 30px;
+    font-family: Noto-Sans;
+}
+
+
+#after-action {
+    color: black;
+}
+
 
 #btn-play-again {
     display: none;
@@ -105,11 +163,7 @@ button {
     display: none;
 }
 
-#question-prompt {
-    font-size: 22px;
-    font-weight: bold;
-    margin: 0 0 10px 0;
-}
+
 
 /* hide answer buttons before quiz begins */
 #answer-list {
@@ -137,6 +191,7 @@ button {
     width: 30%;
     border: 2px solid black;
     border-radius: 20px;
+    display: none;
 }
 
 /* wraps correct and incorrect rows seperately */

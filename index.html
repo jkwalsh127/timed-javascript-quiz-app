@@ -8,21 +8,33 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans">
 </head>
+
 <body>
+
     <header>
-        <h3>View Highscores</h3>
-        <h3 id="time">Timer</h3>
+        <h1 id="main-header">JavaScript<span id="main-span">quiz page</span></h1> 
     </header>
+    
     <main>
-        <article>
+
+        <article id="welcome-article">
+            <h1 id="welcome-header">Welcome</h1>
+            <hr id="welcome-hr"> 
+            <p id="welcome-prompt">
+                Clicking the button below will start the quiz.<br>
+                You will have 30 seconds to choose as many correct answers as possible.<br>
+                High scores will be saved.
+            </p>
+            <button id="btn-begin" class="button">Begin</button>
+        </article>
+
+        <article id ="quiz-article">
             <div id="card-header">
-                <h1 id="welcome-header">Welcome to the unofficial JavaScript quiz page!</h1>
-                <h1 id="question-number"></h1>
+                <h2 id="question-number"></h2>
+                <h3 id="time">Timer</h3>
             </div>
-            <p id="welcome-paragraph">Here you can</p>
             <section id="card">
-                <h4 id="question-prompt">Question prompt goes here</h4>
-                <!-- <p id="after-action">Well done!</p> -->
+                <h4 id="question-prompt">Question goes here</h4>
                 <ul id="answer-button-list">
                     <li id="answer1">
                         <button 
@@ -56,10 +68,10 @@
                         ></button>                    </li>
                 </ul>
             </section>
-            <button id="btn-begin" class="button">Begin</button>
             <button id="btn-play-again" class="button">Play Again</button>
             <button id="btn-check-highscore" class="button">Check Highscore</button>
         </article>
+
         <section id="scoreboard">
             <h2>Your Score</h2>
             <hr>
@@ -76,6 +88,7 @@
                 <ul id="highscore-list"></ul>
 
         </section>
+
     </main>
     <script src="./assets/js/script.js"></script>
 </body>
