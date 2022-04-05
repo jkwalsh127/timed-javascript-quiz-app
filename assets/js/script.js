@@ -8,6 +8,7 @@ var quizSection = document.querySelector("#quiz-section")
 var welcomeArticle = document.querySelector("#welcome-article");    
 var quizArticle = document.querySelector("#quiz-article");    
 var scoreBoard = document.querySelector("#scoreboard");   
+var afterAction = document.querySelector("#after-action");
  
 
 var highscoreList = document.querySelector("#highscore-list");
@@ -23,7 +24,6 @@ var incorrectScore = document.querySelector("#incorrect-score")
 var welcomeHeader = document.querySelector("#welcome-header")
 var welcomeParagraph = document.querySelector("#welcome-paragraph")
 
-var questionPrompt = document.querySelector("#question-prompt")
 
 var timeEl = document.getElementById("time");
 
@@ -128,17 +128,14 @@ function keepTime() {
         if (timeRemaining === 0) {
             clearInterval(timeTracker); 
             timeEl.textContent = "";
-            // correctScore.textContent = "0";
-            // incorrectScore.textContent = "0";
-            // welcomeHeader.setAttribute("style", "display: none")
-            // welcomeParagraph.setAttribute("style", "display: none")
-            questionNumber.textContent = "Time's up";
-            questionPrompt.setAttribute("style", "display: none");
-            answerButtonList.setAttribute("style", "display: none");
-            // afterAction.setAttribute("style", "display: block");
+
             quizSection.setAttribute("style", "display: none");
+
+            questionNumber.textContent = "Time's up";
+            afterAction.setAttribute("style", "display: block");
+            afterAction.textContent = "Nice job. You got " + correctCount + " answers correct.";
+
             playAgainButton.setAttribute("style", "display: block");
-            questionPrompt.textContent = "Nice job. You got " + correctCount + " questions correct."; 
         } 
     }, 1000);
 };

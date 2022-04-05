@@ -178,11 +178,16 @@ main {
 #btn-play-again {
     width: 60%;
     display: none;
-    margin: 300px 20% 0 20%;
+    margin: 250px 20% 0 20%;
 }
 /*  */
 /*  */
 
+#after-action {
+    display: none;
+    font-size: 30px;
+    margin: 50px 0 0 100px;
+}
 
 
 
