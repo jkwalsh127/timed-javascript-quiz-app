@@ -10,7 +10,9 @@ var quizArticle = document.querySelector("#quiz-article");
 var scoreBoard = document.querySelector("#scoreboard");   
 var afterAction = document.querySelector("#after-action");
 var submitScore = document.querySelector("#submit-score");
- 
+
+var highscoreOne = document.querySelector("#highscore-one");
+var initialsOne = document.querySelector("#initials-one");
 
 var highscoreList = document.querySelector("#highscore-list");
 
@@ -30,26 +32,14 @@ var timeEl = document.getElementById("time");
 
 var timeRemaining = 6;
 
-// Call answer-list to display answer ul upon starting each question
-var answerButtonList = document.querySelector("#answer-button-list");
+var answerButtonList = document.querySelector("#answer-button-list"); 
+
+var correctCount = "";
+var incorrectCount = "";
+
 // 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// 
+// 
 // reload page upon clicking the play again button
 playAgainButton.addEventListener("click", reloadPage);
 
@@ -58,69 +48,28 @@ function reloadPage() {
     location.reload();
 }
 // 
-
-var correctCount = "";
-console.log("correct counter initiated", typeof correctCount)
-if(correctCount !== null){
-correctScore.textContent = correctCount;
-}else {
-correctCount = 0;
-correctScore.textContent = correctCount;
-}
-
-var incorrectCount = "";
-console.log("incorrect counter initiated", typeof incorrectCount)
-if(incorrectCount !== null){
-incorrectScore.textContent = incorrectCount;
-}else {
-incorrectCount = 0;
-incorrectScore.textContent = incorrectCount;
-}
+// 
+// 
 
 
-
-
-
-
-
-
-
-
-var highscores = [];
-
-function renderHighScores() {
-    highscoreList.innerHTML = "";
-
-    for (var i = 0; i < highScores.length; i++) {
-        var highScore = highScores[i];
-
-        var li = document.createElement("li");
-        li.textContent = highScore;
-        li.setAttribute("data-index", i);
-
-        highscoreList.appendChild(li);
-    }
-}
-
-function init() {
-    var storedHighScores = JSON.parse(localStorage.getItem("highscores"));
-    if (storedHighScores !== null) {
-        highscores = storedHighScores;
+function renderHighscores() {
+    var score = localStorage.getItem("correct-count");
+    var initials = localStorage.getItem("user-initials");
+    if (!score || !initials) {
+        return;
     }
 
-    renderHighScores();
+    highscoreOne.textContent = score
+    initialsOne.textContent = initials
 }
 
-function storeHighScores() {
-    localStorage.setItem("highscores", JSON.stringify(highscores))
-}
-
-
-var highScores = [];
-var correctCounts = correctCount;
-console.log(correctCounts);
-
-
+// var highscores = {
+//     player: initials.value;
+//     score: correctCount.value;
+// }
+// 
+// 
+// 
 // Set timer to end quiz upon completion
 function keepTime() {
     var timeTracker = setInterval(function() {
@@ -139,31 +88,17 @@ function keepTime() {
             afterAction.textContent = "Nice job. You got " + correctCount + " answers correct.";
 
             playAgainButton.setAttribute("style", "display: block");
+            renderHighscores();
         } 
     }, 1000);
 };
 // 
+// 
+// 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// 
+// 
+// 
 // The function that initiates the quiz 
 beginButton.addEventListener("click", beginQuiz);
 
@@ -187,44 +122,30 @@ function beginQuiz() {
             if (state === "correct") {
                 correctCount++;
                 correctScore.textContent = correctCount;
-                console.log(correctCount, typeof correctCount);
                 localStorage.setItem("correctCount", correctCount);
             } else {
                 incorrectCount++;
                 incorrectScore.textContent = incorrectCount;
-                console.log(incorrectCount, typeof incorrectCount);
             }
         }
     });
 };
 // 
+// 
+// 
+
+answerButtonList.addEventListener("click", function(event) {
+    var element = event.target;
+
+    if (element.matches("button")) {
+
+    }
+})
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// 
+// 
+// 
 // Set the functions to call in questions
 function firstQuestion() {
 
@@ -418,6 +339,5 @@ function seventhQuestion() {
 
 };
 // 
-
-// Call to retrieve data and render it upon page load
-init()
+// 
+// 
