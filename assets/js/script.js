@@ -4,7 +4,9 @@ var answerbtn1 = document.querySelector("#btn1");
 var answerbtn2 = document.querySelector("#btn2");
 var answerbtn3 = document.querySelector("#btn3");
 var answerbtn4 = document.querySelector("#btn4");
+var card = document.querySelector("#card")
 
+var questionNumber = document.querySelector("#question-number");
 var questionPrompt = document.querySelector("#question-prompt");
 
 var afterAction = document.querySelector("#after-action")
@@ -58,6 +60,7 @@ function keepTime() {
     }, 1000);
 };
 
+var correctCount = "";
 // console.log("correct counter initiated", typeof correctCount)
 if(correctCount !== null){
 // console.log(correctCount, typeof correctCount)
@@ -66,9 +69,10 @@ correctScore.textContent = correctCount;
 console.log(correctCount)
 correctCount = 0;
 localStorage.setItem("correctCount", correctCount);
-correctScore.textContent = count;
+correctScore.textContent = correctCount;
 }
 
+var incorrectCount = "";
 // console.log("incorrect counter initiated", typeof incorrectCount)
 if(incorrectCount !== null){
 // console.log(incorrectCount, typeof incorrectCount)
@@ -77,7 +81,7 @@ incorrectScore.textContent = incorrectCount;
 console.log(incorrectCount)
 incorrectCount = 0;
 localStorage.setItem("incorrectCount", incorrectCount);
-incorrectScore.textContent = count;
+incorrectScore.textContent = incorrectCount;
 }
 
 // The function that initates the quiz 
@@ -88,10 +92,12 @@ function beginQuiz() {
     beginButton.setAttribute("style", "display: none;");
     welcomeHeader.setAttribute("style", "display: none;");
     welcomeParagraph.setAttribute("style", "display: none;");
+    questionNumber.setAttribute("style", "display: block");
     questionPrompt.setAttribute("style", "display: block");
     answerButtonList.setAttribute("style", "display: block");
     playAgainButton.setAttribute("style", "display: none");
     answerButtonList.setAttribute("style", "display: block");
+    card.setAttribute("style", "display: block");
 
     // Set timer to begin game
     timeRemaining = 6;
@@ -122,6 +128,7 @@ function beginQuiz() {
 // Set the functions to call in questions
 function firstQuestion() {
 
+    questionNumber.textContent = "Question #1";
     questionPrompt.textContent = "What is the correct syntax for using the addEventListener method?";
     answerbtn1.textContent = "document.addEventListener(event, function, Capture)";
     answerbtn2.textContent = "document.addEventListener(name, value)";
@@ -154,6 +161,7 @@ function firstQuestion() {
 
 function secondQuestion() {
 
+    questionNumber.textContent = "Question #2";
     questionPrompt.textContent = "Which of the following JavaScript types are not immutable?";
     answerbtn1.textContent = "Null and Undefined types";
     answerbtn2.textContent = "Symbol, BigInt, and Boolean types";
@@ -184,6 +192,7 @@ function secondQuestion() {
 
 function thirdQuestion() {
 
+    questionNumber.textContent = "Question #3";
     questionPrompt.textContent = "3?";
     answerbtn1.textContent = "3";
     answerbtn2.textContent = "3";
@@ -214,6 +223,7 @@ function thirdQuestion() {
 
 function fourthQuestion() {
 
+    questionNumber.textContent = "Question #4";
     questionPrompt.textContent = "4?";
     answerbtn1.textContent = "4";
     answerbtn2.textContent = "4";
@@ -244,6 +254,7 @@ function fourthQuestion() {
 
 function fifthQuestion() {
 
+    questionNumber.textContent = "Question #5";
     questionPrompt.textContent = "5?";
     answerbtn1.textContent = "5";
     answerbtn2.textContent = "5";
@@ -274,6 +285,7 @@ function fifthQuestion() {
 
 function sixthQuestion() {
 
+    questionNumber.textContent = "Question #6";
     questionPrompt.textContent = "6?";
     answerbtn1.textContent = "6";
     answerbtn2.textContent = "6";

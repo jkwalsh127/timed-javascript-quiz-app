@@ -6,6 +6,7 @@
     <title>Timed JavaScript Quiz</title>
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans">
 </head>
 <body>
     <header>
@@ -14,7 +15,10 @@
     </header>
     <main>
         <article>
-            <h1 id="welcome-header">Welcome to the unofficial JavaScript quiz page!</h1>
+            <div id="card-header">
+                <h1 id="welcome-header">Welcome to the unofficial JavaScript quiz page!</h1>
+                <h1 id="question-number"></h1>
+            </div>
             <p id="welcome-paragraph">Here you can</p>
             <section id="card">
                 <h4 id="question-prompt">Question prompt goes here</h4>
@@ -69,9 +73,11 @@
             <h2>HighScore</h2>
             <hr>
                 <ul>
-                    <li>1.</li>
-                    <li>2.</li>
-                    <li>3.</li>
+                    <li id="highscore-one">1. </li>
+                    <li id="highscore-two">2. </li>
+                    <li id="highscore-three">3. </li>
+                    <li id="highscore-four">4. </li>
+                    <li id="highscore-five">5. </li>
                 </ul>
         </section>
     </main>
