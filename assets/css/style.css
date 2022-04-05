@@ -1,4 +1,10 @@
 /* global settings */
+:root {
+    --wheat-background: rgba(215, 206, 176, 0.526);
+    --brown-background:  rgba(202, 133, 42, 0.507);
+}
+
+
 button {
     background-color: purple;
     border-radius: 30px;
@@ -55,7 +61,7 @@ main {
     border: 2px solid black;
     border-radius: 15px;
     align-items: center;
-    background-color: rgba(215, 206, 176, 0.526);
+    background-color: var(--wheat-background);
 }
 
 #welcome-header {
@@ -86,11 +92,13 @@ main {
 /*  */
 /*  */
 
-/* Format the article that contains the questions */
+/*  */
+/* Format the quiz article */
 #quiz-article {
     width: 60%;
     height: fit-content;
     border: 2px solid black;
+    background-color: var(--wheat-background);
     border-radius: 20px;
     max-width: 900px;
     display: none;
@@ -98,33 +106,84 @@ main {
     justify-content: space-between;
     align-content: center;
     align-items: center;
+    height: 500px;
 }
+/*  */
+/*  */
 
-#card-header {
+/*  */
+/* Format the quiz header */
+#quiz-header {
     border: 2px solid black;
     border-radius: 20px 20px 0 0;
     background-color: black;
     color: white;
     width: 100%;
-}
-
-#time {
-    font-size: 50px;
+    display: flex;
+    justify-content: space-between;
 }
 
 #question-number {
-    display: none;
-    font-size: 22px;
+    /* display: none; */
+    font-size: 40px;
     font-weight: bold;
+    padding: 10px 0 10px 20px;
 }
 
+#time {
+    font-size: 30px;
+    padding: 10px 80px 0 20px;
+}
+/*  */
+/*  */
+
+/*  */
+/* Format question prompt and answer buttons */
 #question-prompt {
     font-size: 22px;
     font-weight: bold;
-    margin: 0 0 10px 0;
+    margin: 20px 0 10px 20px;
+    /* display: none; */
+}
+
+#quiz-hr {
+    width: 95%;
+    background-color: gray;
+    height: 1px;
+    border: none;
+    margin: 0 5% 0 0;
+}
+
+#answer-button-list {
+    margin: 30px 0 0 0;
+}
+
+.answer-button1 {
+    font-size:  16px;
+    font-weight: bold;
+    margin: 5px 10% 5px 10%;
+    padding: 25px 40px;
+    width: 80%;
+    background-color: rgba(128, 0, 128, 0.822);
+}
+
+.answer-button2 {
+    font-size:  16px;
+    font-weight: bold;
+    margin: 5px 10% 5px 10%;
+    padding: 25px 40px;
+    width: 80%;
+}
+
+#btn-play-again {
+    width: 60%;
     display: none;
+    margin: 300px 20% 0 20%;
 }
 /*  */
+/*  */
+
+
 
 
 
@@ -134,7 +193,7 @@ article p {
 
 
 
-#card {
+#question-section {
     display: none;
     width: 95%;
     padding: 2%;
@@ -155,44 +214,60 @@ h1 {
 }
 
 
-#btn-play-again {
-    display: none;
-}
 
-#btn-check-highscore {
-    display: none;
-}
-
-
-
-/* hide answer buttons before quiz begins */
-#answer-list {
-    display: none;
-}
-
-.answer-button1 {
-    font-size:  16px;
-    font-weight: bold;
-    margin: 5px 0;
-    padding: 25px 40px;
-    width: 90%;
-    background-color: rgba(128, 0, 128, 0.822);
-}
-
-.answer-button2 {
-    font-size:  16px;
-    font-weight: bold;
-    margin: 5px 0;
-    padding: 25px 40px;
-    width: 90%;
-}
-
+/*  */
+/* Format scoreboard */
 #scoreboard {
     width: 30%;
     border: 2px solid black;
     border-radius: 20px;
     display: none;
+    background-color: var(--wheat-background);
+    height: 420px;
 }
+
+#scoreboard-hr {
+    width: 90%;
+    background-color: rgb(145, 81, 29);
+    height: 1px;
+    border: none;
+    margin: 5px 5% 20px 3%;
+}
+
+.correct-count {
+    color: rgb(2, 110, 2);
+    padding: 0px 30px;
+    display: flex;
+    align-self: center;
+    font-size: 45px;
+    width: 50%;
+}
+
+.incorrect-count {
+    color: rgb(137, 2, 2);
+    padding: 0px 30px;
+    display: flex;
+    align-self: center;
+    font-size: 40px;
+    width: 50%;
+    margin: 20px 0 0 0;
+}
+
+#correct {
+    border-bottom: 2px solid rgb(2, 110, 2);
+    justify-content: center;
+    margin: 10px 0 0 100px;
+}
+
+#incorrect {
+    border-bottom: 2px solid rgb(137, 2, 2);
+    justify-content: center;
+    margin: 30px 0 0 100px;
+}
+/*  */
+/*  */
+
+
 
 /* wraps correct and incorrect rows seperately */
 section div {
@@ -214,23 +289,7 @@ section h3 {
     margin: 0 0 20px 30px;
 }
 
-#correct {
-    border-bottom: 2px solid rgb(2, 110, 2);
-    justify-content: center;
-}
 
-#incorrect {
-    border-bottom: 2px solid rgb(137, 2, 2);
-    justify-content: center;
-}
-
-span.score-count {
-    padding: 0px 30px;
-    display: flex;
-    align-self: center;
-    font-size: 50px;
-    width: 50%;
-}
 
 hr {
     width: 100%;

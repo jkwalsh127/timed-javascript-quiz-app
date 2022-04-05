@@ -1,14 +1,14 @@
 var beginButton = document.querySelector("#btn-begin");
 var playAgainButton = document.querySelector("#btn-play-again");
-var checkHighScoreButton = document.querySelector("#btn-check-highscore");
 var answerbtn1 = document.querySelector("#btn1");
 var answerbtn2 = document.querySelector("#btn2");
 var answerbtn3 = document.querySelector("#btn3");
 var answerbtn4 = document.querySelector("#btn4");
-var card = document.querySelector("#card")
+var quizSection = document.querySelector("#quiz-section")
 var welcomeArticle = document.querySelector("#welcome-article");    
 var quizArticle = document.querySelector("#quiz-article");    
-var scoreBoard = document.querySelector("#scoreboard");    
+var scoreBoard = document.querySelector("#scoreboard");   
+ 
 
 var highscoreList = document.querySelector("#highscore-list");
 
@@ -124,33 +124,25 @@ console.log(correctCounts);
 function keepTime() {
     var timeTracker = setInterval(function() {
         timeRemaining--;
-        timeEl.textContent = timeRemaining + " remaining";
+        timeEl.textContent = timeRemaining + " seconds remaining";
         if (timeRemaining === 0) {
             clearInterval(timeTracker); 
-            timeEl.textContent = "time's up";
+            timeEl.textContent = "";
             // correctScore.textContent = "0";
             // incorrectScore.textContent = "0";
             // welcomeHeader.setAttribute("style", "display: none")
             // welcomeParagraph.setAttribute("style", "display: none")
-            questionNumber.textContent = "Nicely done";
+            questionNumber.textContent = "Time's up";
             questionPrompt.setAttribute("style", "display: none");
             answerButtonList.setAttribute("style", "display: none");
             // afterAction.setAttribute("style", "display: block");
-            checkHighScoreButton.setAttribute("style", "display: block");
-            card.setAttribute("style", "display: none");
+            quizSection.setAttribute("style", "display: none");
+            playAgainButton.setAttribute("style", "display: block");
+            questionPrompt.textContent = "Nice job. You got " + correctCount + " questions correct."; 
         } 
     }, 1000);
 };
 // 
-
-
-function checkHighScore() {
-    checkHighScoreButton.setAttribute("style", "display: none");
-    questionNumber.textContent = "your final score is";
-    playAgainButton.setAttribute("style", "display: block");
-    storeHighScores();
-    renderHighScores();
-}
 
 
 
@@ -174,25 +166,14 @@ function checkHighScore() {
 
 // The function that initiates the quiz 
 beginButton.addEventListener("click", beginQuiz);
-checkHighScoreButton.addEventListener("click", checkHighScore);
 
 function beginQuiz() {
     
     welcomeArticle.setAttribute("style", "display: none")
-
-    beginButton.setAttribute("style", "display: none;");
-    welcomeHeader.setAttribute("style", "display: none;");
-    playAgainButton.setAttribute("style", "display: none");
-    card.setAttribute("style", "display: block");
-
     quizArticle.setAttribute("style", "display: block");
     scoreBoard.setAttribute("style", "display: block");
-    questionNumber.setAttribute("style", "display: block");
-    questionPrompt.setAttribute("style", "display: block");
-    answerButtonList.setAttribute("style", "display: block");
-    answerButtonList.setAttribute("style", "display: block");
 
-    // Set timer to begin game
+    // Set timer
     timeRemaining = 6;
     
     keepTime();
