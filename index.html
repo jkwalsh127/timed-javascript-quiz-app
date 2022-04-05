@@ -22,12 +22,12 @@
             <p id="welcome-paragraph">Here you can</p>
             <section id="card">
                 <h4 id="question-prompt">Question prompt goes here</h4>
-                <p id="after-action">Well done!</p>
+                <!-- <p id="after-action">Well done!</p> -->
                 <ul id="answer-button-list">
                     <li id="answer1">
                         <button 
                             id="btn1"
-                            class="answer-button"
+                            class="answer-button1"
                             data-correct="correct"
                             data-incorrect="incorrect"
                         ></button>
@@ -35,7 +35,7 @@
                     <li id="answer2">
                         <button 
                             id="btn2"
-                            class="answer-button"
+                            class="answer-button2"
                             data-correct="correct"
                             data-incorrect="incorrect"
                         ></button>
@@ -43,14 +43,14 @@
                     <li id="answer3">
                         <button 
                             id="btn3"
-                            class="answer-button"
+                            class="answer-button1"
                             data-correct="correct"
                             data-incorrect="incorrect"
                         ></button>                    </li>
                     <li id="answer4">
                         <button 
                             id="btn4"
-                            class="answer-button"
+                            class="answer-button2"
                             data-correct="correct"
                             data-incorrect="incorrect"
                         ></button>                    </li>
@@ -58,8 +58,9 @@
             </section>
             <button id="btn-begin" class="button">Begin</button>
             <button id="btn-play-again" class="button">Play Again</button>
+            <button id="btn-check-highscore" class="button">Check Highscore</button>
         </article>
-        <section>
+        <section id="scoreboard">
             <h2>Your Score</h2>
             <hr>
             <div>
@@ -72,13 +73,8 @@
             </div>
             <h2>HighScore</h2>
             <hr>
-                <ul>
-                    <li id="highscore-one">1. </li>
-                    <li id="highscore-two">2. </li>
-                    <li id="highscore-three">3. </li>
-                    <li id="highscore-four">4. </li>
-                    <li id="highscore-five">5. </li>
-                </ul>
+                <ul id="highscore-list"></ul>
+
         </section>
     </main>
     <script src="./assets/js/script.js"></script>

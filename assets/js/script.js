@@ -1,10 +1,13 @@
 var beginButton = document.querySelector("#btn-begin");
 var playAgainButton = document.querySelector("#btn-play-again");
+var checkHighScoreButton = document.querySelector("#btn-check-highscore");
 var answerbtn1 = document.querySelector("#btn1");
 var answerbtn2 = document.querySelector("#btn2");
 var answerbtn3 = document.querySelector("#btn3");
 var answerbtn4 = document.querySelector("#btn4");
 var card = document.querySelector("#card")
+
+var highscoreList = document.querySelector("#highscore-list");
 
 var questionNumber = document.querySelector("#question-number");
 var questionPrompt = document.querySelector("#question-prompt");
@@ -17,30 +20,111 @@ var incorrectScore = document.querySelector("#incorrect-score")
 var welcomeHeader = document.querySelector("#welcome-header")
 var welcomeParagraph = document.querySelector("#welcome-paragraph")
 
-var correctCount = localStorage.getItem("correctCount");
-
-var incorrectCount = localStorage.getItem("incorrectCount");
-
 var questionPrompt = document.querySelector("#question-prompt")
 
 var timeEl = document.getElementById("time");
 
 var timeRemaining = 6;
 
-
-
 // Call answer-list to display answer ul upon starting each question
 var answerButtonList = document.querySelector("#answer-button-list");
 // 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // reload page upon clicking the play again button
 playAgainButton.addEventListener("click", reloadPage);
 
+// reload page upon selecting to take the quiz again
 function reloadPage() {
     location.reload();
 }
 // 
 
+var correctCount = "";
+console.log("correct counter initiated", typeof correctCount)
+if(correctCount !== null){
+correctScore.textContent = correctCount;
+}else {
+correctCount = 0;
+correctScore.textContent = correctCount;
+}
+
+var incorrectCount = "";
+console.log("incorrect counter initiated", typeof incorrectCount)
+if(incorrectCount !== null){
+incorrectScore.textContent = incorrectCount;
+}else {
+incorrectCount = 0;
+incorrectScore.textContent = incorrectCount;
+}
+
+
+
+
+
+
+
+
+
+
+var highscores = [];
+
+function renderHighScores() {
+    highscoreList.innerHTML = "";
+
+    for (var i = 0; i < highScores.length; i++) {
+        var highScore = highScores[i];
+
+        var li = document.createElement("li");
+        li.textContent = highScore;
+        li.setAttribute("data-index", i);
+
+        highscoreList.appendChild(li);
+    }
+}
+
+function init() {
+    var storedHighScores = JSON.parse(localStorage.getItem("highscores"));
+    if (storedHighScores !== null) {
+        highscores = storedHighScores;
+    }
+
+    renderHighScores();
+}
+
+function storeHighScores() {
+    localStorage.setItem("highscores", JSON.stringify(highscores))
+}
+
+
+
+// function storeHighScores() {
+//     localStorage.setItem("highscores", JSON.stringify(todos));
+// }
+
+
+
+var highScores = [];
+var correctCounts = correctCount;
+console.log(correctCounts);
+
+
+// Set timer to end quiz upon completion
 function keepTime() {
     var timeTracker = setInterval(function() {
         timeRemaining--;
@@ -48,44 +132,68 @@ function keepTime() {
         if (timeRemaining === 0) {
             clearInterval(timeTracker); 
             timeEl.textContent = "time's up";
-            correctScore.textContent = "0";
-            incorrectScore.textContent = "0";
+            // correctScore.textContent = "0";
+            // incorrectScore.textContent = "0";
             // welcomeHeader.setAttribute("style", "display: none")
             // welcomeParagraph.setAttribute("style", "display: none")
+            questionNumber.textContent = "Nicely done";
             questionPrompt.setAttribute("style", "display: none");
             answerButtonList.setAttribute("style", "display: none");
-            afterAction.setAttribute("style", "display: block");
-            playAgainButton.setAttribute("style", "display: block");
+            // afterAction.setAttribute("style", "display: block");
+            checkHighScoreButton.setAttribute("style", "display: block");
+            card.setAttribute("style", "display: none");
         } 
     }, 1000);
 };
+// 
 
-var correctCount = "";
-// console.log("correct counter initiated", typeof correctCount)
-if(correctCount !== null){
-// console.log(correctCount, typeof correctCount)
-correctScore.textContent = correctCount;
-}else {
-console.log(correctCount)
-correctCount = 0;
-localStorage.setItem("correctCount", correctCount);
-correctScore.textContent = correctCount;
+
+function checkHighScore() {
+    // beginButton.setAttribute("style", "display: none;");
+    // welcomeParagraph.setAttribute("style", "display: none;");
+    // questionNumber.setAttribute("style", "display: none");
+    // questionPrompt.setAttribute("style", "display: none");
+    // answerButtonList.setAttribute("style", "display: none");
+
+
+    // var userScore = correctCount;
+    // if (userScore >= 2) {
+    //     var li = document.createElement("li");
+    //     li.textContent = userScore;
+    //     highscoreList.appendChild(li);
+    // }
+
+    checkHighScoreButton.setAttribute("style", "display: none");
+    questionNumber.textContent = "your final score is";
+    playAgainButton.setAttribute("style", "display: block");
+    storeHighScores();
+    renderHighScores();
+    // card.setAttribute("style", "display: block");
 }
 
-var incorrectCount = "";
-// console.log("incorrect counter initiated", typeof incorrectCount)
-if(incorrectCount !== null){
-// console.log(incorrectCount, typeof incorrectCount)
-incorrectScore.textContent = incorrectCount;
-}else {
-console.log(incorrectCount)
-incorrectCount = 0;
-localStorage.setItem("incorrectCount", incorrectCount);
-incorrectScore.textContent = incorrectCount;
-}
 
-// The function that initates the quiz 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// The function that initiates the quiz 
 beginButton.addEventListener("click", beginQuiz);
+checkHighScoreButton.addEventListener("click", checkHighScore);
 
 function beginQuiz() {
     
@@ -113,16 +221,42 @@ function beginQuiz() {
             if (state === "correct") {
                 correctCount++;
                 correctScore.textContent = correctCount;
-                // console.log(correctCount, typeof correctCount);
+                console.log(correctCount, typeof correctCount);
+                localStorage.setItem("correctCount", correctCount);
             } else {
                 incorrectCount++;
                 incorrectScore.textContent = incorrectCount;
-                // console.log(incorrectCount, typeof incorrectCount);
+                console.log(incorrectCount, typeof incorrectCount);
             }
         }
     });
 };
 // 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Set the functions to call in questions
@@ -318,3 +452,6 @@ function seventhQuestion() {
 
 };
 // 
+
+// Call to retrieve data and render it upon page load
+init()
