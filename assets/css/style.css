@@ -383,6 +383,33 @@ hr {
         width: 95%;
     }
 
+    #quiz-article {
+        margin: 250px 0 0 0;    
+        width: 95%; 
+        height: 600px;
+    }
+
+    #answer-button-list {
+        margin: 0px 0 0 0;
+    }
+    
+    .answer-button1 {
+        font-size:  16px;
+        font-weight: bold;
+        margin: 5px 10% 5px 0;
+        padding: 25px 10px;
+        width: 90%;
+        background-color: rgba(128, 0, 128, 0.822);
+    }
+    
+    .answer-button2 {
+        font-size:  16px;
+        font-weight: bold;
+        margin: 5px 10% 5px 0;
+        padding: 25px 10px;
+        width: 90%;
+    }
+
     button {
         width: 300px;
     }
