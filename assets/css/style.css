@@ -358,13 +358,13 @@ hr {
 
     #welcome-article {
         width: 95%;
-        margin: 250px 0 0 0;
+        margin: 150px 0 0 0;
     }
 
     #scoreboard {
         width: 60%;
         height: 370px;
-        margin: 30px 0 0 0;
+        margin: 20px 0 0 0;
     }
 
     #quiz-article {
@@ -377,26 +377,44 @@ hr {
     #welcome-header {
         margin: 0;
     }
+    #welcome-article {
+        width: 95%;
+        margin: 50px 0 0 0;
+    }
+
+    #scoreboard {
+        width: 60%;
+        height: 370px;
+        margin: 10px 0 0 0;
+    }
+
+    #quiz-article {
+        margin: 50px 0 0 0;    
+        width: 95%; 
+        height: 600px;
+    }
 }
-@media (max-width:560px) {
+@media (max-width:590px) {
     main {
         flex-direction: column;
     }
 
     #welcome-article {
         width: 95%;
-        margin: 250px 0 0 0;
+        margin: 150px 0 0 0;
     }
 
     #scoreboard {
         width: 95%;
-        margin: 20px 0 0 0;
+        margin: 10px 0 20px 0;
+        padding: 0 0 20px 0;
     }
 
     #quiz-article {
-        margin: 250px 0 0 0;    
+        margin: 100px 0 0 0;    
         width: 95%; 
         height: 600px;
+        padding: 5px;
     }
 
     #answer-button-list {
