@@ -20,9 +20,16 @@ This project was about using javascript to create an interactive quiz that would
 3. The quiz is over when either the user answers all questions or the timer runs out
 4. a form will be presented to the user to record their initials, and their initials and score will be appended to the 'highscores' list
 
+---
+
+### Gameplay snapshot
+![code snippet - before editing](./assets/images/gameplay.png)
+
+---
+
 #### Usage
 
-Click <a href="https://jkwalsh127.github.io/random-password-generator/">**here**</a> to check out the deployed quiz!
+Click <a href="https://jkwalsh127.github.io/timed-javascript-quiz-app/">**here**</a> to check out the deployed quiz!
 
 
 #### Credits

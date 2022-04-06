@@ -362,6 +362,7 @@ hr {
 
     #scoreboard {
         width: 60%;
+        height: 370px;
     }
 }
 @media (max-width: 750px) {
