@@ -1,7 +1,5 @@
 var beginButton = document.querySelector("#btn-begin");
 var submitScoreButton = document.querySelector("#btn-submit-score");
-var playAgainButton = document.querySelector("#btn-play-again");
-
 var answerbtn1 = document.querySelector("#btn1");
 var answerbtn2 = document.querySelector("#btn2");
 var answerbtn3 = document.querySelector("#btn3");
@@ -12,71 +10,46 @@ var quizArticle = document.querySelector("#quiz-article");
 var scoreBoard = document.querySelector("#scoreboard");   
 var afterAction = document.querySelector("#after-action");
 var submitScore = document.querySelector("#submit-score");
-
 var highscoreOne = document.querySelector("#highscore-one");
 var initialsOne = document.querySelector("#initials-one");
-
 var highscoreList = document.querySelector("#highscore-list");
-
 var questionNumber = document.querySelector("#question-number");
 var questionPrompt = document.querySelector("#question-prompt");
-
 var afterAction = document.querySelector("#after-action")
-
 var correctScore = document.querySelector("#correct-score")
 var incorrectScore = document.querySelector("#incorrect-score")
-
 var welcomeHeader = document.querySelector("#welcome-header")
 var welcomeParagraph = document.querySelector("#welcome-paragraph")
-
-
 var timeEl = document.getElementById("time");
-
-
 var answerButtonList = document.querySelector("#answer-button-list"); 
-
 var correctCount = "";
 var incorrectCount = "";
 
+beginButton.addEventListener("click", beginQuiz);
+ 
 // 
 // 
-// 
-
-
-
-if (highscoresArray != null) {
-    highscoresArray = "";
-    console.log(highscoresArray);
-} else {
-    var highscoresArray = [localStorage.getItem("highscores")];
-}
-// var highscoreParse = JSON.parse(highscoresArray);
-
-
-
-
-
+// var highscores = [10, 7, 5, 3, 1];
+// function checkHighScore() {
+//     for (var i = 0; i < highscores.length; i++) {
+//         if (correctCount > highscores[i]) {
+//             highscores.splice(i, 1, correctCount);
+//             localStorage.setItem("highscores", highscores);
+//             return;
+//         }
+//     }
+// };
 function renderHighscores() {
     var score = localStorage.getItem("score");
     var initials = localStorage.getItem("initials");
 
     if (!score || !initials) {
         return;
-    }
-    console.log(highscoresArray);
-    for (var i = 0; i < highscoresArray.length; i++) {
-        var highscoreIndex = highscoresArray[i];
-        var highscorePost = JSON.parse(highscoreIndex);
-        console.log(highscorePost);
-    
-        var li = document.createElement("li");
-        li.textContent = initials + "    -    " + highscorePost;
-        li.setAttribute("data-index", i);
-        highscoreList.appendChild(li)
     };
+        var li = document.createElement("li");  
+        li.textContent = initials + "    -    " + score;
+        highscoreList.appendChild(li);
 };
-
-playAgainButton.addEventListener("click", reloadPage);
 
 renderHighscores();
 
@@ -84,13 +57,38 @@ renderHighscores();
 function reloadPage() {
     location.reload();
 }
+ 
 // 
 // 
-// 
+function endQuiz() {
 
+    timeEl.textContent = "";
 
+    quizSection.setAttribute("style", "display: none");
 
+    afterAction.setAttribute("style", "display: block");
+    submitScore.setAttribute("style", "display: block");
+    submitScoreButton.setAttribute("style", "display: block");
 
+    questionNumber.textContent = "Time's up";
+    afterAction.textContent = "Nice job. You got " + correctCount + " answers correct.";
+
+    submitScoreButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        
+        var getInitials = document.querySelector("#submit-text").value;
+        
+        if (getInitials === "") {
+            reloadPage();
+        } else {
+            localStorage.setItem("score", correctCount);
+            localStorage.setItem("initials", getInitials);
+            renderHighscores();
+            reloadPage();
+        };
+    })
+}
+ 
 // 
 // Set timer to end quiz upon completion
 function keepTime() {
@@ -99,69 +97,24 @@ function keepTime() {
         timeEl.textContent = timeRemaining + " seconds remaining";
         if (timeRemaining === 0) {
             clearInterval(timeTracker); 
-            timeEl.textContent = "";
-
-            quizSection.setAttribute("style", "display: none");
-
-            afterAction.setAttribute("style", "display: block");
-            submitScore.setAttribute("style", "display: block");    
-            questionNumber.textContent = "Time's up";
-
-            afterAction.textContent = "Nice job. You got " + correctCount + " answers correct.";
-
-            submitScoreButton.setAttribute("style", "display: block");
-
-            // playAgainButton.setAttribute("style", "display: block");
-            var highscoresArray = [];
-            console.log(highscoresArray);
-            console.log(correctCount);
-            highscoresArray.push(correctCount);
-            console.log(highscoresArray);
-            localStorage.setItem("highscores", highscoresArray);
-            var highscoreParse = JSON.parse(highscoresArray);
-            console.log(highscoreParse);
-
-
-
-
-            submitScoreButton.addEventListener("click", function(event) {
-                event.preventDefault();
-            
-                var getInitials = document.querySelector("#submit-text").value;
-            
-                if (getInitials === "") {
-                    // reloadPage();
-                } else {
-                    localStorage.setItem("score", correctCount);
-                    localStorage.setItem("initials", getInitials);
-                    var highscoreParse = JSON.parse(highscoresArray);
-                    console.log(highscoreParse);
-                    renderHighscores();
-                    // reloadPage();
-                };
-            });
+            endQuiz();
         } 
     }, 1000);
 };
 // 
 // 
-// 
 
-// 
-// 
 // 
 // The function that initiates the quiz 
-beginButton.addEventListener("click", beginQuiz);
-
 function beginQuiz() {
     
     welcomeArticle.setAttribute("style", "display: none")
     quizArticle.setAttribute("style", "display: block");
-    scoreBoard.setAttribute("style", "display: block");
+    quizSection.setAttribute("style", "display: block");
 
     // Set timer
-    timeRemaining = 3;
-    
+    timeRemaining = 50;
+
     keepTime();
 
     firstQuestion();
@@ -177,25 +130,15 @@ function beginQuiz() {
             } else {
                 incorrectCount++;
                 incorrectScore.textContent = incorrectCount;
+                timeRemaining = timeRemaining - 10;
+
             }
         }
     });
 };
 // 
 // 
-// 
 
-answerButtonList.addEventListener("click", function(event) {
-    var element = event.target;
-
-    if (element.matches("button")) {
-
-    }
-})
-
-
-// 
-// 
 // 
 // Set the functions to call in questions
 function firstQuestion() {
@@ -247,7 +190,7 @@ function secondQuestion() {
     });
     answerbtn2.addEventListener("click", function(event) {
         var element = event.target;
-        element.setAttribute("data-state", "correct");
+        element.setAttribute("data-state", "inorrect");
         thirdQuestion();
     });
     answerbtn3.addEventListener("click", function(event) {
@@ -257,7 +200,7 @@ function secondQuestion() {
     });
     answerbtn4.addEventListener("click", function(event) {
         var element = event.target;
-        element.setAttribute("data-state", "incorrect");
+        element.setAttribute("data-state", "correct");
         thirdQuestion();
     });
 };
@@ -265,20 +208,20 @@ function secondQuestion() {
 function thirdQuestion() {
 
     questionNumber.textContent = "Question #3";
-    questionPrompt.textContent = "3?";
-    answerbtn1.textContent = "3";
-    answerbtn2.textContent = "3";
-    answerbtn3.textContent = "3";
-    answerbtn4.textContent = "3";
+    questionPrompt.textContent = "What symbols are used for single-line comments in JavaScript";
+    answerbtn1.textContent = "/* */";
+    answerbtn2.textContent = "//";
+    answerbtn3.textContent = "#";
+    answerbtn4.textContent = "$";
 
     answerbtn1.addEventListener("click", function(event) {
         var element = event.target;
-        element.setAttribute("data-state", "correct");
+        element.setAttribute("data-state", "incorrect");
         fourthQuestion();
     });
     answerbtn2.addEventListener("click", function(event) {
         var element = event.target;
-        element.setAttribute("data-state", "incorrect");
+        element.setAttribute("data-state", "correct");
         fourthQuestion();
     });
     answerbtn3.addEventListener("click", function(event) {
@@ -296,11 +239,11 @@ function thirdQuestion() {
 function fourthQuestion() {
 
     questionNumber.textContent = "Question #4";
-    questionPrompt.textContent = "4?";
-    answerbtn1.textContent = "4";
-    answerbtn2.textContent = "4";
-    answerbtn3.textContent = "4";
-    answerbtn4.textContent = "4";
+    questionPrompt.textContent = "What operator checks if two values or variables are not equal in value or type?";
+    answerbtn1.textContent = "!=";
+    answerbtn2.textContent = "x";
+    answerbtn3.textContent = "!==";
+    answerbtn4.textContent = "/";
 
     answerbtn1.addEventListener("click", function(event) {
         var element = event.target;
@@ -309,12 +252,12 @@ function fourthQuestion() {
     });
     answerbtn2.addEventListener("click", function(event) {
         var element = event.target;
-        element.setAttribute("data-state", "correct");
+        element.setAttribute("data-state", "incorrect");
         fifthQuestion();
     });
     answerbtn3.addEventListener("click", function(event) {
         var element = event.target;
-        element.setAttribute("data-state", "incorrect");
+        element.setAttribute("data-state", "correct");
         fifthQuestion();
     });
     answerbtn4.addEventListener("click", function(event) {
@@ -327,11 +270,11 @@ function fourthQuestion() {
 function fifthQuestion() {
 
     questionNumber.textContent = "Question #5";
-    questionPrompt.textContent = "5?";
-    answerbtn1.textContent = "5";
-    answerbtn2.textContent = "5";
-    answerbtn3.textContent = "5";
-    answerbtn4.textContent = "5";
+    questionPrompt.textContent = "What does the parseInt() method do";
+    answerbtn1.textContent = "parses a string argument and returns an array";
+    answerbtn2.textContent = "parses a string argument and returns an integer";
+    answerbtn3.textContent = "parses an integer argument and returns a string";
+    answerbtn4.textContent = "parses an array argument and returns a string";
 
     answerbtn1.addEventListener("click", function(event) {
         var element = event.target;
@@ -358,34 +301,30 @@ function fifthQuestion() {
 function sixthQuestion() {
 
     questionNumber.textContent = "Question #6";
-    questionPrompt.textContent = "6?";
-    answerbtn1.textContent = "6";
-    answerbtn2.textContent = "6";
-    answerbtn3.textContent = "6";
-    answerbtn4.textContent = "6";
+    questionPrompt.textContent = "Which of the following is not a method to call a pop-up box?";
+    answerbtn1.textContent = "Alert";
+    answerbtn2.textContent = "Confirm";
+    answerbtn3.textContent = "Prompt";
+    answerbtn4.textContent = "Message";
 
     answerbtn1.addEventListener("click", function(event) {
         var element = event.target;
         element.setAttribute("data-state", "incorrect");
-        seventhQuestion();
+        endQuiz();
     });
     answerbtn2.addEventListener("click", function(event) {
         var element = event.target;
-        element.setAttribute("data-state", "correct");
-        seventhQuestion();
+        element.setAttribute("data-state", "incorrect");
+        endQuiz();
     });
     answerbtn3.addEventListener("click", function(event) {
         var element = event.target;
         element.setAttribute("data-state", "incorrect");
-        seventhQuestion();
+        endQuiz();
     });
     answerbtn4.addEventListener("click", function(event) {
         var element = event.target;
-        element.setAttribute("data-state", "incorrect");
-        seventhQuestion();
+        element.setAttribute("data-state", "correct");
+        endQuiz();
     });
-};
-
-function seventhQuestion() {
-
 };

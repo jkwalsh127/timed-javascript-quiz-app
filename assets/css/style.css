@@ -350,3 +350,40 @@ hr {
     height: 1px;
     border: none;
 }
+
+@media (max-width: 1180px) {
+    main {
+        flex-direction: column;
+    }
+
+    #welcome-article {
+        width: 95%;
+    }
+
+    #scoreboard {
+        width: 60%;
+    }
+}
+@media (max-width: 750px) {
+    #welcome-header {
+        margin: 0;
+    }
+}
+@media (max-width:560px) {
+    main {
+        flex-direction: column;
+    }
+
+    #welcome-article {
+        width: 95%;
+    }
+
+    #scoreboard {
+        width: 95%;
+    }
+
+    button {
+        width: 300px;
+    }
+}
+
