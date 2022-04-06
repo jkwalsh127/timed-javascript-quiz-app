@@ -41,21 +41,44 @@ var incorrectCount = "";
 // 
 // 
 // 
-// reload page upon clicking the play again button
+
+
+
+if (highscoresArray != null) {
+    highscoresArray = "";
+    console.log(highscoresArray);
+} else {
+    var highscoresArray = [localStorage.getItem("highscores")];
+}
+// var highscoreParse = JSON.parse(highscoresArray);
+
+
+
+
+
 function renderHighscores() {
     var score = localStorage.getItem("score");
     var initials = localStorage.getItem("initials");
+
     if (!score || !initials) {
         return;
     }
-
-    highscoreOne.textContent = score
-    initialsOne.textContent = initials
-}
+    console.log(highscoresArray);
+    for (var i = 0; i < highscoresArray.length; i++) {
+        var highscoreIndex = highscoresArray[i];
+        var highscorePost = JSON.parse(highscoreIndex);
+        console.log(highscorePost);
+    
+        var li = document.createElement("li");
+        li.textContent = initials + "    -    " + highscorePost;
+        li.setAttribute("data-index", i);
+        highscoreList.appendChild(li)
+    };
+};
 
 playAgainButton.addEventListener("click", reloadPage);
 
-
+renderHighscores();
 
 // reload page upon selecting to take the quiz again
 function reloadPage() {
@@ -68,12 +91,6 @@ function reloadPage() {
 
 
 
-// var highscores = {
-//     player: initials.value;
-//     score: correctCount.value;
-// }
-// 
-// 
 // 
 // Set timer to end quiz upon completion
 function keepTime() {
@@ -95,6 +112,17 @@ function keepTime() {
             submitScoreButton.setAttribute("style", "display: block");
 
             // playAgainButton.setAttribute("style", "display: block");
+            var highscoresArray = [];
+            console.log(highscoresArray);
+            console.log(correctCount);
+            highscoresArray.push(correctCount);
+            console.log(highscoresArray);
+            localStorage.setItem("highscores", highscoresArray);
+            var highscoreParse = JSON.parse(highscoresArray);
+            console.log(highscoreParse);
+
+
+
 
             submitScoreButton.addEventListener("click", function(event) {
                 event.preventDefault();
@@ -102,14 +130,16 @@ function keepTime() {
                 var getInitials = document.querySelector("#submit-text").value;
             
                 if (getInitials === "") {
-                    reloadPage;
+                    // reloadPage();
                 } else {
                     localStorage.setItem("score", correctCount);
                     localStorage.setItem("initials", getInitials);
+                    var highscoreParse = JSON.parse(highscoresArray);
+                    console.log(highscoreParse);
                     renderHighscores();
+                    // reloadPage();
                 };
             });
-
         } 
     }, 1000);
 };
@@ -359,6 +389,3 @@ function sixthQuestion() {
 function seventhQuestion() {
 
 };
-// 
-// 
-// 
