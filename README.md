@@ -25,8 +25,8 @@ This project was about using javascript to create an interactive quiz that would
 
 ---
 
-### Gameplay snapshot
-![code snippet - before editing](./assets/images/gameplay.png)
+### Gameplay preview
+![gif demonstration of the quiz](./assets/images/timed-javascript-web-app-readme-gif.gif)
 
 ---
 
