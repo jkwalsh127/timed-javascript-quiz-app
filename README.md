@@ -1,7 +1,5 @@
 # timed-javascript-quiz-app
 
----
-
 |   Languages   | Used |
 | ----------- | ----------- |
 | HTML     |    ✅    |
