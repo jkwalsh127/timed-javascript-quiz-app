@@ -15,11 +15,11 @@ var initialsOne = document.querySelector("#initials-one");
 var highscoreList = document.querySelector("#highscore-list");
 var questionNumber = document.querySelector("#question-number");
 var questionPrompt = document.querySelector("#question-prompt");
-var afterAction = document.querySelector("#after-action")
-var correctScore = document.querySelector("#correct-score")
-var incorrectScore = document.querySelector("#incorrect-score")
-var welcomeHeader = document.querySelector("#welcome-header")
-var welcomeParagraph = document.querySelector("#welcome-paragraph")
+var afterAction = document.querySelector("#after-action");
+var correctScore = document.querySelector("#correct-score");
+var incorrectScore = document.querySelector("#incorrect-score");
+var welcomeHeader = document.querySelector("#welcome-header");
+var welcomeParagraph = document.querySelector("#welcome-paragraph");
 var timeEl = document.getElementById("time");
 var answerButtonList = document.querySelector("#answer-button-list"); 
 var correctCount = "";
@@ -95,7 +95,7 @@ function keepTime() {
     var timeTracker = setInterval(function() {
         timeRemaining--;
         timeEl.textContent = timeRemaining + " seconds remaining";
-        if (timeRemaining === 0) {
+        if (timeRemaining === 0 || timeRemaining < 0) {
             clearInterval(timeTracker); 
             endQuiz();
         } 
@@ -117,214 +117,175 @@ function beginQuiz() {
 
     keepTime();
 
-    firstQuestion();
+    callQuestion();
+};
 
-    answerButtonList.addEventListener("click", function(event) {
-        var element = event.target;
-        if (element.matches("button")) {
-            var state = element.getAttribute("data-state");
-            if (state === "correct") {
-                correctCount++;
-                correctScore.textContent = correctCount;
-                localStorage.setItem("correctCount", correctCount);
-            } else {
-                incorrectCount++;
-                incorrectScore.textContent = incorrectCount;
-                timeRemaining = timeRemaining - 10;
+function waitForSelection() {
+    return new Promise(resolve => waitForUserSelection = resolve);
+};
+function resolveBtn() {
+    waitForUserSelection();
+};
+var currentQuestion = [];
 
-            }
+answerButtonList.addEventListener("click", function(event) {
+    var element = event.target;
+    if (element.matches("button")) {
+        var state = element.getAttribute("data-value");
+
+        var currentAnswer = currentQuestion.slice(-1);
+
+        if (state == currentAnswer[0]) {
+            correctCount++;
+            correctScore.textContent = correctCount;
+            localStorage.setItem("correctCount", correctCount);
+        } else {
+            incorrectCount++;
+            incorrectScore.textContent = incorrectCount;
+            timeRemaining = timeRemaining - 10;
         }
-    });
-};
-// 
-// 
+    };
+});
 
-// 
+answerButtonList.addEventListener("click", resolveBtn)
+
+async function callQuestion() {
+
+    for (var i = 0; i < questionInfo.length; i++) {
+    
+    var question = questionInfo[i];
+
+    currentQuestion.push(question.correct);
+
+    questionNumber.textContent = question.number;
+    questionPrompt.textContent = question.prompt;
+    answerbtn1.textContent = question.btn1;
+    answerbtn2.textContent = question.btn2;
+    answerbtn3.textContent = question.btn3;
+    answerbtn4.textContent = question.btn4;
+
+    await waitForSelection();    
+    };
+    endQuiz();
+};
+
+
+
+
+
+var questionInfo = [{
+    number: "Question #1",
+    prompt: "Which of the following JavaScript types are not immutable?",
+    btn1: "Null and Undefined types",
+    btn2: "Symbol, BigInt, and Boolean types",
+    btn3: "String and Number types",
+    btn4: "Objects",
+    correct: "4",
+},
+{
+    number: "Question #2",
+    prompt: "What is the correct syntax for using the addEventListener method?",
+    btn1: "document.addEventListener(event, function, Capture)",
+    btn2: "document.addEventListener(name, value)",
+    btn3: "document.addEventListener(keyname, value)",
+    btn4: "document.adddEventListener(name, condition)",
+    correct: "1",
+},
+{
+    number: "Question #3",
+    prompt: "What symbols are used for single-line comments in JavaScript",
+    btn1: "/* */",
+    btn2: "//",
+    btn3: "#",
+    btn4: "$",
+    correct: "2",
+},
+{
+    number: "Question #4",
+    prompt: "What operator checks if two values or variables are not equal in value or type?",
+    btn1: "!=",
+    btn2: "x",
+    btn3: "!==",
+    btn4: "/",
+    correct: "3",
+},
+{   
+    number: "Question #5",
+    prompt: "What does the parseInt() method do",
+    btn1: "parses a string argument and returns an array",
+    btn2: "parses a string argument and returns an integer",
+    btn3: "parses an integer argument and returns a string",
+    btn4: "parses an array argument and returns a string",
+    correct: "2",
+},
+{   
+    number: "Question #6",
+    prompt: "Which of the following is not a method to call a pop-up box?",
+    btn1: "Alert",
+    btn2: "Confirm",
+    btn3: "Prompt",
+    btn4: "Message",
+    correct: "4",
+}
+];
+
+// This is a relic function from my first attempt at building this project. I relied very heavily on creating functions, making each individual question its own function, which would pass the user to the next question by calling the corresponding function after a click event. The final product is much cleaner, compartmentalized, and succinct. 
 // Set the functions to call in questions
-function firstQuestion() {
+// function firstQuestion() {
 
-    questionNumber.textContent = "Question #1";
-    questionPrompt.textContent = "What is the correct syntax for using the addEventListener method?";
-    answerbtn1.textContent = "document.addEventListener(event, function, Capture)";
-    answerbtn2.textContent = "document.addEventListener(name, value)";
-    answerbtn3.textContent = "document.addEventListener(keyname, value)";
-    answerbtn4.textContent = "document.adddEventListener(name, condition)";
+//     questionNumber.textContent = "Question #1";
+//     questionPrompt.textContent = "Which of the following JavaScript types are not immutable?";
+//     answerbtn1.textContent = "Null and Undefined types";
+//     answerbtn2.textContent = "Symbol, BigInt, and Boolean types";
+//     answerbtn3.textContent = "String and Number types";
+//     answerbtn4.textContent = "Objects";
 
-    answerbtn1.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "correct");
-        secondQuestion();
-    });
-    answerbtn2.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "incorrect");
-        secondQuestion();
-    });
-    answerbtn3.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "incorrect");
-        secondQuestion();
-    });
-    answerbtn4.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "incorrect")
-        secondQuestion();
-    });
-
-
-};
-
-function secondQuestion() {
-
-    questionNumber.textContent = "Question #2";
-    questionPrompt.textContent = "Which of the following JavaScript types are not immutable?";
-    answerbtn1.textContent = "Null and Undefined types";
-    answerbtn2.textContent = "Symbol, BigInt, and Boolean types";
-    answerbtn3.textContent = "String and Number types";
-    answerbtn4.textContent = "Objects";
-
-    answerbtn1.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "incorrect");
-        thirdQuestion();
-    });
-    answerbtn2.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "inorrect");
-        thirdQuestion();
-    });
-    answerbtn3.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "incorrect");
-        thirdQuestion();
-    });
-    answerbtn4.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "correct");
-        thirdQuestion();
-    });
-};
-
-function thirdQuestion() {
-
-    questionNumber.textContent = "Question #3";
-    questionPrompt.textContent = "What symbols are used for single-line comments in JavaScript";
-    answerbtn1.textContent = "/* */";
-    answerbtn2.textContent = "//";
-    answerbtn3.textContent = "#";
-    answerbtn4.textContent = "$";
-
-    answerbtn1.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "incorrect");
-        fourthQuestion();
-    });
-    answerbtn2.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "correct");
-        fourthQuestion();
-    });
-    answerbtn3.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "incorrect");
-        fourthQuestion();
-    });
-    answerbtn4.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "incorrect");
-        fourthQuestion();
-    });
-};
-
-function fourthQuestion() {
-
-    questionNumber.textContent = "Question #4";
-    questionPrompt.textContent = "What operator checks if two values or variables are not equal in value or type?";
-    answerbtn1.textContent = "!=";
-    answerbtn2.textContent = "x";
-    answerbtn3.textContent = "!==";
-    answerbtn4.textContent = "/";
-
-    answerbtn1.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "incorrect");
-        fifthQuestion();
-    });
-    answerbtn2.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "incorrect");
-        fifthQuestion();
-    });
-    answerbtn3.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "correct");
-        fifthQuestion();
-    });
-    answerbtn4.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "incorrect");
-        fifthQuestion();
-    });
-};
-
-function fifthQuestion() {
-
-    questionNumber.textContent = "Question #5";
-    questionPrompt.textContent = "What does the parseInt() method do";
-    answerbtn1.textContent = "parses a string argument and returns an array";
-    answerbtn2.textContent = "parses a string argument and returns an integer";
-    answerbtn3.textContent = "parses an integer argument and returns a string";
-    answerbtn4.textContent = "parses an array argument and returns a string";
-
-    answerbtn1.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "incorrect");
-        sixthQuestion();
-    });
-    answerbtn2.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "correct");
-        sixthQuestion();
-    });
-    answerbtn3.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "incorrect");
-        sixthQuestion();
-    });
-    answerbtn4.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "incorrect");
-        sixthQuestion();
-    });
-};
-
-function sixthQuestion() {
-
-    questionNumber.textContent = "Question #6";
-    questionPrompt.textContent = "Which of the following is not a method to call a pop-up box?";
-    answerbtn1.textContent = "Alert";
-    answerbtn2.textContent = "Confirm";
-    answerbtn3.textContent = "Prompt";
-    answerbtn4.textContent = "Message";
-
-    answerbtn1.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "incorrect");
-        endQuiz();
-    });
-    answerbtn2.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "incorrect");
-        endQuiz();
-    });
-    answerbtn3.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "incorrect");
-        endQuiz();
-    });
-    answerbtn4.addEventListener("click", function(event) {
-        var element = event.target;
-        element.setAttribute("data-state", "correct");
-        endQuiz();
-    });
-};
+//     answerbtn1.addEventListener("click", function(event) {
+//         var element = event.target;
+//         element.setAttribute("data-state", "incorrect");
+//         secondQuestion();
+//     });
+//     answerbtn2.addEventListener("click", function(event) {
+//         var element = event.target;
+//         element.setAttribute("data-state", "incorrect");
+//         secondQuestion();
+//     });
+//     answerbtn3.addEventListener("click", function(event) {
+//         var element = event.target;
+//         element.setAttribute("data-state", "incorrect");
+//         secondQuestion();
+//     });
+//     answerbtn4.addEventListener("click", function(event) {
+//         var element = event.target;
+//         element.setAttribute("data-state", "correct")
+//         secondQuestion();
+//     });
+// };
+// The bad initial attempt at setting my for loop after instantiating the array of objectified questions
+// function callQuestion() {
+//     for (var i = 0; i < questionInfo.length; i++) {
+//     var question = questionInfo[i];
+//     questionNumber.textContent = question.number;
+//     questionPrompt.textContent = question.prompt;
+//     answerbtn1.textContent = question.btn1;
+//     answerbtn2.textContent = question.btn2;
+//     answerbtn3.textContent = question.btn3;
+//     answerbtn4.textContent = question.btn4;
+//     answerButtonList.addEventListener("click", function(event) {
+//         var element = event.target;
+//         if (element.matches("button")) {
+//             var state = element.getAttribute("data-value");
+//             if (state == question.correct) {
+//                 correctCount++;
+//                 correctScore.textContent = correctCount;
+//                 localStorage.setItem("correctCount", correctCount);
+//             } else {
+//                 incorrectCount++;
+//                 incorrectScore.textContent = incorrectCount;
+//                 timeRemaining = timeRemaining - 10;
+//             }
+//         };
+//     });
+//     };
+//     endQuiz();
+// };
