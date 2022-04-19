@@ -1,12 +1,14 @@
 # timed-javascript-quiz-app
 
----
-
 |   Languages   | Used |
 | ----------- | ----------- |
 | HTML     |    ✅    |
 | CSS  |    ✅     |
 | JavaScript  |    ✅    |
+
+## Usage
+
+Click <a href="https://jkwalsh127.github.io/timed-javascript-quiz-app/">**here**</a> to check out the deployed quiz!
 
 ## Description
 
@@ -23,19 +25,44 @@ This project was about using javascript to create an interactive quiz that would
 4. The card that holds the questions will be replaced with an 'after-action' card that outputs the user's final number of correct answers along with the form for their initials.
 5. Upon submitting the form, the user's score and initials will be appended to the highscores list, and the after-action card will be replaced with the welcome card
 
----
 
 ### Gameplay preview
 ![gif demonstration of the quiz](./assets/images/timed-javascript-web-app-readme-gif.gif)
 
----
 
-#### Usage
+### Collaborators
 
-Click <a href="https://jkwalsh127.github.io/timed-javascript-quiz-app/">**here**</a> to check out the deployed quiz!
+Just myself! Get in touch with me:
 
+email: jkwalsh127@gmail.com
+
+linkedIn: https://www.linkedin.com/in/jake--walsh/
+
+my portfolio page: https://jkwalsh127.github.io/my-portfolio-page/
 
 #### Credits
 
 Staff at UC Berkeley Extension full-stack coding bootcamp
 
+#### Liscense 
+
+MIT
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
